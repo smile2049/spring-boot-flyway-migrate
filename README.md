@@ -9,24 +9,30 @@ Plugins to generate and run Flyway migrations in Spring Boot projects using Hibe
 Add the plugin and Jitpack plugin repository to your POM:
 
 ```xml
-<plugins>
+<project>
+  ...
+  <plugins>
     ...
     <plugin>
-        <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
-        <artifactId>maven-plugin</artifactId>
-        <version>0.1</version>
+      <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
+      <artifactId>maven-plugin</artifactId>
+      <version>0.1</version>
     </plugin>
-</plugins>
+  </plugins>
+</project>
 ```
 
 ```xml
-<pluginRepositories>
+<project>
+  ...
+  <pluginRepositories>
     ...
     <pluginRepository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    <pluginRepository>
-</pluginRepositories>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </pluginRepository>
+  </pluginRepositories>
+</project>
 ```
 
 **Gradle**
@@ -64,7 +70,7 @@ Database configuration for the plugin is picked up from your Spring Boot configu
 On command line: 
 
 ```bash
-mvn spring-boot-flyway-migrate-maven-plugin:goal -Dkey=value
+mvn com.github.tom-power.spring-boot-flyway-migrate:maven-plugin:goal -Dkey=value
 ```
 
 ##Goals
@@ -90,3 +96,7 @@ Migrations are written to ```resources/db/migration``` in the format expected by
 **Flyway** http://flywaydb.org/documentation/
 
 Dependencies for MySQL, PostgreSQL are included, additional dependencies can be added in your project as needed. [link](https://maven.apache.org/guides/mini/guide-configuring-plugins.html#Using_the_dependencies_Tag)
+
+##Samples
+
+**Maven** https://github.com/tom-power/spring-boot-flyway-migrate-sample-maven
