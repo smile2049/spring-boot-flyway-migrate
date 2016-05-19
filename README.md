@@ -99,4 +99,4 @@ Dependencies for MySQL, PostgreSQL are included, additional dependencies can be 
 
 ##Samples
 
-**Maven** https://github.com/tom-power/spring-boot-flyway-migrate-sample-maven
+See "samples" directory.
