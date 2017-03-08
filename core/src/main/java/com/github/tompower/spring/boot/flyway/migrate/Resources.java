@@ -15,11 +15,11 @@ import org.apache.maven.artifact.DependencyResolutionRequiredException;
 
 public class Resources {
 
-    private final List<String> paths;
+    private final List<String> resources;
     private static Resources instance = null;
 
-    protected Resources(List<String> elements) {
-        this.paths = elements;
+    protected Resources(List<String> resources) {
+        this.resources = resources;
         updateClassloader();
     }
 
@@ -58,8 +58,8 @@ public class Resources {
 
     public List<URL> getUrls() throws MalformedURLException {
         List<URL> urls = new ArrayList<>();
-        for (String path : paths) {
-            urls.add(new File(path).toURI().toURL());
+        for (String resource : resources) {
+            urls.add(new File(resource).toURI().toURL());
         }
         return urls;
     }
@@ -80,19 +80,6 @@ public class Resources {
     private List<File> getResourceFiles() throws DependencyResolutionRequiredException, MalformedURLException, URISyntaxException {
         File[] files = new File(getClassloader().getResource("").toURI()).listFiles();
         return Arrays.asList(files);
-    }
-
-    private final String MIGRATION_FILE_BASE = "src/main/resources/db/migration/V";
-    private final String MIGRATION_FILE_SUFFIX = "__migration.sql";
-
-    /**
-     * Get output file for Flyway Migration
-     *
-     * @param version
-     * @return File
-     */
-    public File getFlywayOutputFile(Integer version) {
-        return new File(MIGRATION_FILE_BASE + String.valueOf(version) + MIGRATION_FILE_SUFFIX);
     }
 
 }

@@ -12,26 +12,29 @@ import org.apache.maven.artifact.DependencyResolutionRequiredException;
 
 public class PluginGenerate {
 
-    private final FlywayMigrateLogger logger;
+    private final String resourceBaseDir;
     private final List<String> paths;
     private final String profile;
+    private final FlywayMigrateLogger logger;
 
-    public PluginGenerate(List<String> paths, String profile, FlywayMigrateLogger logger) {
-        this.logger = logger;
+    public PluginGenerate(String resourceBaseDir, List<String> paths, String profile, FlywayMigrateLogger logger) {
+        this.resourceBaseDir = resourceBaseDir;
         this.paths = paths;
         this.profile = profile;
+        this.logger = logger;
     }
 
     private Resources resources;
     private Generate generate;
     private Writer writer;
+    private Output output;
 
     public void generate() {
         try {
             init();
             List<String> updates = generate.generateUpdates();
             if (!updates.isEmpty()) {
-                File file = resources.getFlywayOutputFile(generate.getFlywaySchemaVersion() + 1);
+                File file = output.getFlywayOutputFile(generate.getFlywaySchemaVersion() + 1);
                 if (!file.exists()) {
                     file.getParentFile().mkdirs();
                     if (!file.createNewFile()) {
@@ -56,6 +59,7 @@ public class PluginGenerate {
         Hibernate hibernate = new HibernateFactory(properties, resources.getUrls()).create();
         generate = new Generate(hibernate);
         writer = new Writer();
+        output = new Output(properties, resourceBaseDir);
     }
 
 }

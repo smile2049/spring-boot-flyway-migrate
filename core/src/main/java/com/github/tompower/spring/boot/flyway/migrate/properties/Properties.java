@@ -24,4 +24,8 @@ public class Properties {
         return properties.getProperty(PropertiesKeys.PASSWORD);
     }
 
+    public String getFlywayLocations() {
+        return properties.getProperty(PropertiesKeys.FLYWAY_LOCATIONS);
+    }
+
 }

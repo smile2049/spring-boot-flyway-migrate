@@ -8,5 +8,5 @@ public class PropertiesKeys {
     public static final String PROPERTIES = "properties";
     public static final String YAML = "yaml";
     public static final String APPLICATION = "application";
-
+    public static final String FLYWAY_LOCATIONS = "flyway.locations";
 }

@@ -16,7 +16,7 @@ Add the plugin and Jitpack plugin repository to your POM:
     <plugin>
       <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
       <artifactId>maven-plugin</artifactId>
-      <version>0.1</version>
+      <version>0.2</version>
     </plugin>
   </plugins>
 </project>
@@ -88,7 +88,9 @@ Migrations are generated using hbm2ddl.auto update, because of this they *should
 
 Generated migrations won't contain destructive commands. If you want to use these you'll need to add them manually, though please see Flyway documentation about *lack of support for downward migrations* and *maintaining backwards compatibility* between your project and database. [link](http://flywaydb.org/documentation/faq.html#downgrade)
 
-Migrations are written to ```resources/db/migration``` in the format expected by Spring Boot. These will be *run against your database automatically* on Spring Boot project startup if you have Flyway as a dependency. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
+Migrations are written in the format expected by Spring Boot and to the location specified in the project configuration, including where profile and vendor specific directories are specified  [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup). 
+
+Migrations will be *run against your database automatically* on Spring Boot project startup if you have Flyway as a dependency. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
 
 ##Database support
 

@@ -10,7 +10,7 @@ public class GenerateTask extends GradleFlywayMigrateTask {
     public void exec() {
         List<String> paths = getPaths(getProject());
         FlywayMigrateLogger logger = new LoggerGradleImpl(getLogger());
-        new PluginGenerate(paths, profile, logger).generate();
+        new PluginGenerate("", paths, profile, logger).generate();
     }
 
 }
