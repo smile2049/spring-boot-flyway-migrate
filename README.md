@@ -16,7 +16,7 @@ Add the plugin and Jitpack plugin repository to your POM:
     <plugin>
       <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
       <artifactId>maven-plugin</artifactId>
-      <version>0.2</version>
+      <version>0.1</version>
     </plugin>
   </plugins>
 </project>
@@ -101,4 +101,4 @@ Dependencies for MySQL, PostgreSQL are included, additional dependencies can be 
 
 ##Samples
 
-See "samples" directory.
+See https://github.com/tom-power/spring-boot-flyway-migrate-samples.
