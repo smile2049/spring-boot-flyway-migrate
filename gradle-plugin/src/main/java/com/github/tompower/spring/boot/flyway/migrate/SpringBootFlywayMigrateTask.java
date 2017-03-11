@@ -4,12 +4,12 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.gradle.api.DefaultTask;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.JavaPluginConvention;
-import org.gradle.api.tasks.JavaExec;
 import org.gradle.api.tasks.SourceSet;
 
-public abstract class GradleFlywayMigrateTask extends JavaExec {
+public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
 
     protected final String profile = System.getProperty("profile");
 
@@ -25,7 +25,7 @@ public abstract class GradleFlywayMigrateTask extends JavaExec {
         return resources;
     }
 
-    private static SourceSet findMainSourceSet(Project project) {
+    private SourceSet findMainSourceSet(Project project) {
         for (SourceSet sourceSet : getJavaSourceSets(project)) {
             if (SourceSet.MAIN_SOURCE_SET_NAME.equals(sourceSet.getName())) {
                 return sourceSet;
@@ -34,7 +34,7 @@ public abstract class GradleFlywayMigrateTask extends JavaExec {
         return null;
     }
 
-    private static Iterable<SourceSet> getJavaSourceSets(Project project) {
+    private Iterable<SourceSet> getJavaSourceSets(Project project) {
         JavaPluginConvention plugin = project.getConvention()
                 .getPlugin(JavaPluginConvention.class);
         if (plugin == null) {

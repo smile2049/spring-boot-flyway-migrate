@@ -48,7 +48,7 @@ apply plugin: 'spring-boot-flyway-migrate-gradle-plugin'
 ```gradle
 buildscript {
     dependencies {
-        classpath("com.github.tom-power:spring-boot-flyway-migrate-gradle-plugin:0.3")
+        classpath("com.github.tom-power:spring-boot-flyway-migrate-gradle-plugin:0.2")
     }
 }
 ```

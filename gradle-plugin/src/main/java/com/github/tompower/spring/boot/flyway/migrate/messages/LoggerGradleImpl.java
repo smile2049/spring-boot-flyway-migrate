@@ -10,8 +10,7 @@ public class LoggerGradleImpl implements FlywayMigrateLogger {
 
     @Override
     public void info(String message) {
-        System.out.println(message);
-//        logger.info(message);
+        logger.info(message);
     }
 
     @Override

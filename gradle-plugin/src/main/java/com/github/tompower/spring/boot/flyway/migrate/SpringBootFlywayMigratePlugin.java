@@ -6,9 +6,9 @@ import org.gradle.api.Plugin;
 public class SpringBootFlywayMigratePlugin implements Plugin<Project> {
 
     @Override
-    public void apply(Project target) {
-        target.getTasks().create("flywayGenerate", GenerateTask.class);
-        target.getTasks().create("flywayMigrate", MigrateTask.class);
+    public void apply(Project project) {
+        project.getTasks().create("flywayGenerate", GenerateTask.class);
+        project.getTasks().create("flywayMigrate", MigrateTask.class);
     }
 
 }

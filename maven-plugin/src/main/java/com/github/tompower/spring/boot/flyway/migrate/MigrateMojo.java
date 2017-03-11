@@ -25,7 +25,7 @@ public class MigrateMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException {
         try {
-            new PluginMigrate(project.getCompileClasspathElements(), profile, logger).migrate();
+            new PluginMigrate(project.getBasedir().getAbsolutePath(), project.getCompileClasspathElements(), profile, logger).migrate();
         } catch (DependencyResolutionRequiredException ex) {
             logger.error(ex.getMessage());
         }

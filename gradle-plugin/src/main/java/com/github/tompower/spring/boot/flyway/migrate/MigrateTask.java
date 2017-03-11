@@ -3,14 +3,15 @@ package com.github.tompower.spring.boot.flyway.migrate;
 import com.github.tompower.spring.boot.flyway.migrate.messages.FlywayMigrateLogger;
 import com.github.tompower.spring.boot.flyway.migrate.messages.LoggerGradleImpl;
 import java.util.List;
+import org.gradle.api.tasks.TaskAction;
 
-public class MigrateTask extends GradleFlywayMigrateTask {
+public class MigrateTask extends SpringBootFlywayMigrateTask {
 
-    @Override
-    public void exec() {
+    @TaskAction
+    public void migrate() {
         List<String> paths = getPaths(getProject());
         FlywayMigrateLogger logger = new LoggerGradleImpl(getLogger());
-        new PluginMigrate(paths, profile, logger).migrate();
+        new PluginMigrate(getProject().getRootDir().getAbsolutePath(), paths, profile, logger).migrate();
     }
 
 }

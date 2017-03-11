@@ -3,15 +3,17 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
     <artifactId>spring-boot-flyway-migrate</artifactId>
-    <version>0.1</version>
     <name>Spring Boot Flyway Migrate</name>
+    <properties>
+        <project.version>0.2</project.version>
+    </properties>
+    <version>${project.version}</version>
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
         <module>maven-plugin</module>
-        <!--<module>spring-boot-flyway-migrate-gradle-plugin</module>-->
+        <module>gradle-plugin</module>
     </modules>
-
     <build>
         <plugins>
             <plugin>
@@ -25,5 +27,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
