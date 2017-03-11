@@ -27,14 +27,14 @@ public class PluginGenerate {
     private Resources resources;
     private Generate generate;
     private Writer writer;
-    private Output output;
+    private Migration migration;
 
     public void generate() {
         try {
             init();
-            List<String> updates = generate.generateUpdates();
+            List<String> updates = generate.getUpdates();
             if (!updates.isEmpty()) {
-                File file = output.getFlywayOutputFile(generate.getFlywaySchemaVersion() + 1);
+                File file = migration.getFile(generate.getCurrentVersion() + 1);
                 if (!file.exists()) {
                     file.getParentFile().mkdirs();
                     if (!file.createNewFile()) {
@@ -59,7 +59,7 @@ public class PluginGenerate {
         Hibernate hibernate = new HibernateFactory(properties, resources.getUrls()).create();
         generate = new Generate(hibernate);
         writer = new Writer();
-        output = new Output(properties, resourceBaseDir);
+        migration = new Migration(properties, resourceBaseDir);
     }
 
 }

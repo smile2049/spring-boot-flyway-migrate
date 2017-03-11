@@ -18,7 +18,7 @@ public class Generate {
      * Generate list of schema updates between Hibernate entities and configured database
      * @return List<String>
      */
-    public List<String> generateUpdates() {
+    public List<String> getUpdates() {
         List<SchemaUpdateScript> generateSchemaUpdateScriptList = hibernate.getConfiguration().generateSchemaUpdateScriptList(hibernate.getDialect(), hibernate.getDatabaseMetadata());
         return generateSchemaUpdateScriptList.stream().map(SchemaUpdateScript::getScript).collect(Collectors.toList());
     }
@@ -28,7 +28,7 @@ public class Generate {
      * @return Integer
      * @throws SQLException
      */
-    public Integer getFlywaySchemaVersion() throws SQLException {
+    public Integer getCurrentVersion() throws SQLException {
         ResultSet tables = hibernate.getConnection().getMetaData().getTables(null, null, "schema_version", new String[]{"TABLE"});
         if (tables.next()) {
             String sql = "select max(s.version) as max_version from schema_version s";
