@@ -97,7 +97,7 @@ Migrations will be *run against your database automatically* on Spring Boot proj
 **Hibernate** https://developer.jboss.org/wiki/SupportedDatabases2<br/>
 **Flyway** http://flywaydb.org/documentation/
 
-Dependencies for MySQL, PostgreSQL are included, additional dependencies can be added in your project as needed. [link](https://maven.apache.org/guides/mini/guide-configuring-plugins.html#Using_the_dependencies_Tag)
+Dependencies for MySQL, PostgreSQL and H2 are included, additional dependencies can be added in your project as needed. [link](https://maven.apache.org/guides/mini/guide-configuring-plugins.html#Using_the_dependencies_Tag)
 
 ##Samples
 

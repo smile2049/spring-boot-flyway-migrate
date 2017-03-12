@@ -4,11 +4,11 @@
     <parent>
         <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
         <artifactId>spring-boot-flyway-migrate</artifactId>
-        <version>${project.version}</version>
+        <version>0.2</version>
     </parent>
     <artifactId>gradle-plugin</artifactId>
     <name>Spring Boot Flyway Migrate Gradle Plugin</name>
-    <version>${project.version}</version>
+    <version>0.2</version>
     <properties>
         <gradle.version>2.9</gradle.version>
     </properties>
@@ -16,12 +16,13 @@
         <dependency>
             <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
             <artifactId>core</artifactId>
-            <version>${project.version}</version>
+            <version>0.2</version>
         </dependency>
         <dependency>
             <groupId>io.spring.gradle</groupId>
             <artifactId>dependency-management-plugin</artifactId>
             <version>0.5.4.RELEASE</version>
+            <scope>provided</scope>
         </dependency>
         <!-- Provided -->
         <dependency>
@@ -75,5 +76,30 @@
             <url>http://repo.spring.io/plugins-release/</url>
         </repository>
     </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>assemble-all</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

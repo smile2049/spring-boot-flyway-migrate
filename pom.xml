@@ -7,7 +7,7 @@
     <properties>
         <project.version>0.2</project.version>
     </properties>
-    <version>${project.version}</version>
+    <version>0.2</version>
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
