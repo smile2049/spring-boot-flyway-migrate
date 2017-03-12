@@ -9,23 +9,28 @@ public class Properties {
     }
 
     public String getUrl() {
-        return properties.getProperty(PropertiesKeys.JDBC_URL);
+        String url = properties.getProperty(PropertiesValues.JDBC_URL);
+        return url != null ? url : PropertiesValues.DEFAULT_URL;
     }
 
     public String getDriver() {
-        return properties.getProperty(PropertiesKeys.DRIVER_CLASS);
+        String driver = properties.getProperty(PropertiesValues.DRIVER_CLASS);
+        return driver != null ? driver : PropertiesValues.DEFAULT_DRIVER;
     }
 
     public String getUser() {
-        return properties.getProperty(PropertiesKeys.USERNAME);
+        String username = properties.getProperty(PropertiesValues.USERNAME);
+        return username != null ? username : "";
     }
 
     public String getPass() {
-        return properties.getProperty(PropertiesKeys.PASSWORD);
+        String password = properties.getProperty(PropertiesValues.PASSWORD);
+        return password != null ? password : "";
     }
 
     public String getFlywayLocations() {
-        return properties.getProperty(PropertiesKeys.FLYWAY_LOCATIONS);
+        String flywayLocations = properties.getProperty(PropertiesValues.FLYWAY_LOCATIONS);
+        return flywayLocations != null ? flywayLocations : "";
     }
 
 }

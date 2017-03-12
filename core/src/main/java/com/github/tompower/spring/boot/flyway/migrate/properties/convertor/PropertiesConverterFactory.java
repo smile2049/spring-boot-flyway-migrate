@@ -1,6 +1,6 @@
 package com.github.tompower.spring.boot.flyway.migrate.properties.convertor;
 
-import com.github.tompower.spring.boot.flyway.migrate.properties.PropertiesKeys;
+import com.github.tompower.spring.boot.flyway.migrate.properties.PropertiesValues;
 
 public class PropertiesConverterFactory {
 
@@ -12,9 +12,9 @@ public class PropertiesConverterFactory {
 
     public PropertiesConverter getPropertiesConverter() {
         switch (type) {
-            case PropertiesKeys.PROPERTIES:
+            case PropertiesValues.PROPERTIES:
                 return new PropertiesConverterProperties();
-            case PropertiesKeys.YAML:
+            case PropertiesValues.YAML:
                 return new PropertiesConverterYaml();
             default:
                 throw new AssertionError();

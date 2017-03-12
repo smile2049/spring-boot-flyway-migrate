@@ -27,14 +27,14 @@ public class PropertiesProviderTest {
         propertiesProvider = new PropertiesProvider();
     }
 
-    private final String PROPERTIES = PropertiesKeys.PROPERTIES;
-    private final String YAML = PropertiesKeys.YAML;
+    private final String PROPERTIES = PropertiesValues.PROPERTIES;
+    private final String YAML = PropertiesValues.YAML;
     private final String BASE = "base";
     private final String DEV = "dev";
 
     @Test(expected = IOException.class)
     public void testNonExistingApplicationProperties() throws Exception {
-        propertiesProvider.getProperties(getFiles(), null);
+        propertiesProvider.getProperties(null, null);
     }
 
     @Test
@@ -42,8 +42,7 @@ public class PropertiesProviderTest {
         setupProperties(null, PROPERTIES);
         setupProperties(DEV, PROPERTIES);
         Properties properties = propertiesProvider.getProperties(getFiles(), null);
-        assertNotNull(properties);
-        assertEquals(BASE, properties.getUrl());
+        assertPropertiesOk(properties, DEV);
     }
 
     @Test
@@ -51,28 +50,50 @@ public class PropertiesProviderTest {
         setupProperties(null, PROPERTIES);
         setupProperties(DEV, PROPERTIES);
         Properties properties = propertiesProvider.getProperties(getFiles(), DEV);
-        assertNotNull(properties);
-        assertEquals(DEV, properties.getUrl());
+        assertPropertiesOk(properties, DEV);
     }
 
     @Test
     public void testReadExistingApplicationYaml() throws Exception {
         setupProperties(null, YAML);
         Properties properties = propertiesProvider.getProperties(getFiles(), null);
-        assertNotNull(properties);
-        assertEquals(BASE, properties.getUrl());
+        assertPropertiesOk(properties, DEV);
     }
 
     @Test
     public void testReadExistingProfileApplicationYamlWithProfile() throws Exception {
         setupProperties(DEV, YAML);
         Properties properties = propertiesProvider.getProperties(getFiles(), DEV);
+        assertPropertiesOk(properties, DEV);
+    }
+
+
+    private void assertPropertiesOk(Properties properties, String profile) {
         assertNotNull(properties);
-        assertEquals(DEV, properties.getUrl());
+        assertEquals(getUrl(profile), properties.getUrl());
+    }
+
+    @Test
+    public void testReadProfileApplicationPropertiesWithBlankEntry() throws Exception {
+        makeFile(DEV, PROPERTIES);
+        Properties properties = propertiesProvider.getProperties(getFiles(), DEV);
+        assertNotNull(properties);
+        assertEquals(PropertiesValues.DEFAULT_URL, properties.getUrl());
+    }
+    @Test
+    public void testReadProfileApplicationYamlWithBlankEntry() throws Exception {
+        makeFile(DEV, YAML);
+        Properties properties = propertiesProvider.getProperties(getFiles(), DEV);
+        assertNotNull(properties);
+        assertEquals(PropertiesValues.DEFAULT_URL, properties.getUrl());
     }
 
     private void setupProperties(String profile, String extension) throws IOException {
-        File file = folder.newFile(getPath(profile, extension));
+        File file = makeFile(profile, extension);
+        writeToFile(profile, extension, file);
+    }
+
+    private void writeToFile(String profile, String extension, File file) throws IOException {
         switch (extension) {
             case PROPERTIES:
                 writeProperties(file, profile);
@@ -85,9 +106,13 @@ public class PropertiesProviderTest {
         }
     }
 
+    private File makeFile(String profile, String extension) throws IOException {
+        return folder.newFile(getPath(profile, extension));
+    }
+
     private String getPath(String profile, String extension) {
         String thisProfile = profile != null ? "-" + profile : "";
-        return PropertiesKeys.APPLICATION + thisProfile + "." + extension;
+        return PropertiesValues.APPLICATION + thisProfile + "." + extension;
     }
 
     private List<File> getFiles() {
@@ -96,13 +121,13 @@ public class PropertiesProviderTest {
 
     private void writeYaml(File file, String profile) throws IOException {
         Map<String, Object> data = new HashMap<>();
-        data.put(PropertiesKeys.JDBC_URL, getUrl(profile));
+        data.put(PropertiesValues.JDBC_URL, getUrl(profile));
         new Yaml().dump(data, new FileWriter(file));
     }
 
     private void writeProperties(File file, String profile) throws IOException {
         java.util.Properties prop = new java.util.Properties();
-        prop.setProperty(PropertiesKeys.JDBC_URL, getUrl(profile));
+        prop.setProperty(PropertiesValues.JDBC_URL, getUrl(profile));
         prop.store(new FileOutputStream(file), null);
     }
 

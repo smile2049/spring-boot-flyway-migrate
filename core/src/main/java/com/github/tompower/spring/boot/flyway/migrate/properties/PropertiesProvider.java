@@ -58,12 +58,12 @@ public class PropertiesProvider {
 
         private static boolean isApplication(String path) {
             return !StringUtils.isEmpty(path)
-                    && path.contains(PropertiesKeys.APPLICATION);
+                    && path.contains(PropertiesValues.APPLICATION);
         }
 
         private static boolean isProperties(String extension) {
             return !StringUtils.isEmpty(extension)
-                    && extension.equals(PropertiesKeys.PROPERTIES) || extension.equals(PropertiesKeys.YAML);
+                    && extension.equals(PropertiesValues.PROPERTIES) || extension.equals(PropertiesValues.YAML);
         }
 
     }

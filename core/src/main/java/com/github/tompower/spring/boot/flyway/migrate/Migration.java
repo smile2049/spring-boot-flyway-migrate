@@ -6,11 +6,6 @@ import org.springframework.boot.jdbc.DatabaseDriver;
 
 public class Migration {
 
-    private final String DEFAULT_MIGRATION_DIRECTORY = "db/migration";
-    private final String MIGRATION_FILE_PREFIX = "V";
-    private final String MIGRATION_FILE_SUFFIX = "__migration.sql";
-    private final String VENDOR = "{vendor}";
-
     private final Properties properties;
     private final String resourceBaseDir;
 
@@ -29,7 +24,7 @@ public class Migration {
     }
 
     private String getMigrationFile(Integer version) {
-        return MIGRATION_FILE_PREFIX + String.valueOf(version) + MIGRATION_FILE_SUFFIX;
+        return MigrationValues.MIGRATION_FILE_PREFIX + String.valueOf(version) + MigrationValues.MIGRATION_FILE_SUFFIX;
     }
 
     /**
@@ -37,20 +32,20 @@ public class Migration {
      * @return
      */
     public String getDirectory() {
-        return resourceBaseDir + "/" + getDirectoryBase() + "/" + getVendorDirectory();
+        return resourceBaseDir + "/" + getDirectoryBase() + getVendorDirectory() + "/";
 
     }
 
     private String getDirectoryBase() {
-        return "".equals(getFlywayLocationsDirectory()) ? getFlywayLocationsDirectory() : DEFAULT_MIGRATION_DIRECTORY;
+        return !"".equals(getFlywayLocationsDirectory()) ? getFlywayLocationsDirectory() : MigrationValues.DEFAULT_MIGRATION_DIRECTORY;
     }
 
     private String getFlywayLocationsDirectory() {
-        return properties.getFlywayLocations().replace(VENDOR, "");
+        return properties.getFlywayLocations().replace(MigrationValues.VENDOR, "");
     }
 
     private String getVendorDirectory() {
-        return isVendor() ? getVendor() + "/" : "";
+        return isVendor() ? getVendor() : "";
     }
 
     private String getVendor() {
@@ -58,7 +53,7 @@ public class Migration {
     }
 
     private Boolean isVendor() {
-        return properties.getFlywayLocations().endsWith(VENDOR);
+        return properties.getFlywayLocations().endsWith(MigrationValues.VENDOR);
     }
 
 }
