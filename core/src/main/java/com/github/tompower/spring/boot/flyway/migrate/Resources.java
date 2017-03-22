@@ -18,22 +18,16 @@ public class Resources {
     private final List<String> resources;
     private static Resources instance = null;
 
-    protected Resources(List<String> resources) {
+    protected Resources(List<String> resources) throws MalformedURLException, DependencyResolutionRequiredException {
         this.resources = resources;
         updateClassloader();
     }
 
-    private void updateClassloader() {
-        try {
-            Thread.currentThread().setContextClassLoader(getClassloader());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (DependencyResolutionRequiredException e) {
-            e.printStackTrace();
-        }
+    private void updateClassloader() throws MalformedURLException, DependencyResolutionRequiredException {
+        Thread.currentThread().setContextClassLoader(getClassloader());
     }
 
-    public static Resources getInstance(List<String> elements) {
+    public static Resources getInstance(List<String> elements) throws MalformedURLException, DependencyResolutionRequiredException {
         if (instance == null) {
             instance = new Resources(elements);
         }

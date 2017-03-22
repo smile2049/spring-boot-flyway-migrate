@@ -19,7 +19,7 @@ public class MigrationTest {
     @Test
     public void testVendorDirectory() throws Exception {
         Migration defaultVendorMigration = getMigration(getProperties(getDefaultVendorProperties()));
-        assertEquals(defaultDir + "h2/", defaultVendorMigration.getDirectory());
+        assertEquals(defaultDir + "derby/", defaultVendorMigration.getDirectory());
     }
 
     private java.util.Properties getDefaultVendorProperties() {

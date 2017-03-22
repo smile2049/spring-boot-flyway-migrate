@@ -29,27 +29,23 @@ public class PluginGenerate {
     private Writer writer;
     private Migration migration;
 
-    public void generate() {
-        try {
-            init();
-            List<String> updates = generate.getUpdates();
-            if (!updates.isEmpty()) {
-                File file = migration.getFile(generate.getCurrentVersion() + 1);
-                if (!file.exists()) {
-                    file.getParentFile().mkdirs();
-                    if (!file.createNewFile()) {
-                        logger.error(Messages.CANNOT_CREATE + file.getAbsolutePath());
-                    }
-                    writer.write(updates, file);
-                    logger.info(Messages.CREATED + file.getAbsolutePath());
-                } else {
-                    logger.info(Messages.EXISTS + file.getAbsolutePath());
+    public void generate() throws DependencyResolutionRequiredException, IOException, URISyntaxException, SQLException {
+        init();
+        List<String> updates = generate.getUpdates();
+        if (!updates.isEmpty()) {
+            File file = migration.getFile(generate.getCurrentVersion() + 1);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                if (!file.createNewFile()) {
+                    logger.error(Messages.CANNOT_CREATE + file.getAbsolutePath());
                 }
+                writer.write(updates, file);
+                logger.info(Messages.CREATED + file.getAbsolutePath());
             } else {
-                logger.info(Messages.UP_TO_DATE);
+                logger.info(Messages.EXISTS + file.getAbsolutePath());
             }
-        } catch (SQLException | IOException | DependencyResolutionRequiredException | URISyntaxException ex) {
-            logger.error(ex.getMessage());
+        } else {
+            logger.info(Messages.UP_TO_DATE);
         }
     }
 

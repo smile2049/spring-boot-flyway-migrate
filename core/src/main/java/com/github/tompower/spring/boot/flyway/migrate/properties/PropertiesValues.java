@@ -11,8 +11,6 @@ public class PropertiesValues {
     public static final String YAML = "yaml";
     public static final String APPLICATION = "application";
 
-    public static final String DEFAULT_URL = "jdbc:h2:mem:testdb";
-    public static final String DEFAULT_DRIVER = "org.h2.Driver";
-
-
+    public static final String DEFAULT_URL = "jdbc:derby:memory:testdb;create=true";
+    public static final String DEFAULT_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
 }
