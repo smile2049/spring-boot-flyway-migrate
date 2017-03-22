@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
+import org.flywaydb.core.Flyway;
 
 public class PluginMigrate {
 
@@ -29,7 +30,8 @@ public class PluginMigrate {
     public void migrate() {
         try {
             init();
-            int migrations = new Migrator(new String[]{migration.getDirectory()}, resources.getClassloader(), properties).flywayMigrate();
+            Flyway flyway = FlywayFactory.create(new String[]{migration.getDirectory()}, resources.getClassloader(), properties);
+            int migrations = flyway.migrate();
             logger.info(Messages.MIGRATION_SUCCESSFUL + Messages.getMigrationMessage(migrations));
         } catch (DependencyResolutionRequiredException | IOException | URISyntaxException ex) {
             logger.error(ex.getMessage());

@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.List;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
+import org.flywaydb.core.Flyway;
 
 public class PluginGenerate {
 
@@ -52,10 +53,11 @@ public class PluginGenerate {
     private void init() throws IOException, URISyntaxException, DependencyResolutionRequiredException {
         resources = Resources.getInstance(paths);
         Properties properties = resources.getProperties(profile);
-        Hibernate hibernate = new HibernateFactory(properties, resources.getUrls()).create();
-        generate = new Generate(hibernate);
-        writer = new Writer();
         migration = new Migration(properties, resourceBaseDir);
+        Flyway flyway = FlywayFactory.create(new String[]{migration.getDirectory()}, resources.getClassloader(), properties);
+        Hibernate hibernate = new HibernateFactory(properties, resources.getUrls()).create();
+        generate = new Generate(hibernate, flyway);
+        writer = new Writer();
     }
 
 }

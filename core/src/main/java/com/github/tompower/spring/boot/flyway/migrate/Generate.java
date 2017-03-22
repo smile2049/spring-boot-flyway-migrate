@@ -1,17 +1,20 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.MigrationInfo;
 import org.hibernate.tool.hbm2ddl.SchemaUpdateScript;
 
 public class Generate {
 
     private final Hibernate hibernate;
+    private final Flyway flyway;
 
-    public Generate(Hibernate hibernate) {
+    public Generate(Hibernate hibernate, Flyway flyway) {
         this.hibernate = hibernate;
+        this.flyway = flyway;
     }
 
     /**
@@ -29,15 +32,10 @@ public class Generate {
      * @throws SQLException
      */
     public Integer getCurrentVersion() throws SQLException {
-        ResultSet tables = hibernate.getConnection().getMetaData().getTables(null, null, "schema_version", new String[]{"TABLE"});
-        if (tables.next()) {
-            String sql = "select max(s.version) as max_version from schema_version s";
-            ResultSet rs = hibernate.getConnection().createStatement().executeQuery(sql);
-            while (rs.next()) {
-                return (int) rs.getDouble("max_version");
-            }
-        }
-        return 0;
+        MigrationInfo current = flyway.info().current();
+        if (current == null)
+            return 0;
+        return Integer.valueOf(current.getVersion().getVersion());
     }
 
 }
