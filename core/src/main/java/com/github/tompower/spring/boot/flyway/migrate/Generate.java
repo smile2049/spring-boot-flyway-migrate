@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.MigrationInfo;
+import org.hibernate.dialect.Dialect;
+import org.hibernate.tool.hbm2ddl.DatabaseMetadata;
 import org.hibernate.tool.hbm2ddl.SchemaUpdateScript;
 
 public class Generate {
@@ -22,8 +24,10 @@ public class Generate {
      * @return List<String>
      */
     public List<String> getUpdates() {
-        List<SchemaUpdateScript> generateSchemaUpdateScriptList = hibernate.getConfiguration().generateSchemaUpdateScriptList(hibernate.getDialect(), hibernate.getDatabaseMetadata());
-        return generateSchemaUpdateScriptList.stream().map(SchemaUpdateScript::getScript).collect(Collectors.toList());
+        Dialect dialect = hibernate.getDialect();
+        DatabaseMetadata databaseMetadata = hibernate.getDatabaseMetadata();
+        List<SchemaUpdateScript> updates = hibernate.getConfiguration().generateSchemaUpdateScriptList(dialect, databaseMetadata);
+        return updates.stream().map(SchemaUpdateScript::getScript).collect(Collectors.toList());
     }
 
     /**

@@ -18,16 +18,16 @@ public class Resources {
     private final List<String> resources;
     private static Resources instance = null;
 
-    protected Resources(List<String> resources) throws MalformedURLException, DependencyResolutionRequiredException {
+    protected Resources(List<String> resources) throws PluginExecutionException {
         this.resources = resources;
         updateClassloader();
     }
 
-    private void updateClassloader() throws MalformedURLException, DependencyResolutionRequiredException {
+    private void updateClassloader() throws PluginExecutionException {
         Thread.currentThread().setContextClassLoader(getClassloader());
     }
 
-    public static Resources getInstance(List<String> elements) throws MalformedURLException, DependencyResolutionRequiredException {
+    public static Resources getInstance(List<String> elements) throws PluginExecutionException {
         if (instance == null) {
             instance = new Resources(elements);
         }
@@ -43,9 +43,13 @@ public class Resources {
      * @throws MalformedURLException
      * @throws DependencyResolutionRequiredException
      */
-    public ClassLoader getClassloader() throws MalformedURLException, DependencyResolutionRequiredException {
+    public ClassLoader getClassloader() throws PluginExecutionException {
         if (classLoader == null) {
-            classLoader = URLClassLoader.newInstance(getUrls().toArray(new URL[0]), Thread.currentThread().getContextClassLoader());
+            try {
+                return classLoader = URLClassLoader.newInstance(getUrls().toArray(new URL[0]), Thread.currentThread().getContextClassLoader());
+            } catch (MalformedURLException e) {
+                throw new PluginExecutionException(e.getMessage());
+            }
         }
         return classLoader;
     }
@@ -67,11 +71,11 @@ public class Resources {
      * @throws URISyntaxException
      * @throws org.apache.maven.artifact.DependencyResolutionRequiredException
      */
-    public Properties getProperties(String profile) throws IOException, URISyntaxException, DependencyResolutionRequiredException {
+    public Properties getProperties(String profile) throws PluginExecutionException, URISyntaxException, IOException {
         return new PropertiesProvider().getProperties(getResourceFiles(), profile);
     }
 
-    private List<File> getResourceFiles() throws DependencyResolutionRequiredException, MalformedURLException, URISyntaxException {
+    private List<File> getResourceFiles() throws PluginExecutionException, URISyntaxException {
         File[] files = new File(getClassloader().getResource("").toURI()).listFiles();
         return Arrays.asList(files);
     }

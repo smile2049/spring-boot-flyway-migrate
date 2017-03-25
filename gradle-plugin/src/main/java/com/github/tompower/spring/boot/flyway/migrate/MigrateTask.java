@@ -9,9 +9,13 @@ public class MigrateTask extends SpringBootFlywayMigrateTask {
 
     @TaskAction
     public void migrate() {
-        List<String> paths = getPaths(getProject());
-        FlywayMigrateLogger logger = new LoggerGradleImpl(getLogger());
-        new PluginMigrate(getProject().getRootDir().getAbsolutePath(), paths, profile, logger).migrate();
+        try {
+            List<String> paths = getPaths(getProject());
+            FlywayMigrateLogger logger = new LoggerGradleImpl(getLogger());
+            new PluginMigrate(getProject().getRootDir().getAbsolutePath(), paths, profile, logger).execute();
+        } catch (PluginExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
 }

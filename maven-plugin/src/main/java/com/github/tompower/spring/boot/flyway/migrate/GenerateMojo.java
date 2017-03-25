@@ -2,9 +2,6 @@ package com.github.tompower.spring.boot.flyway.migrate;
 
 import com.github.tompower.spring.boot.flyway.migrate.messages.FlywayMigrateLogger;
 import com.github.tompower.spring.boot.flyway.migrate.messages.LoggerMavenImpl;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.sql.SQLException;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
@@ -30,8 +27,8 @@ public class GenerateMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException {
         try {
             Resource resource = (Resource) project.getBuild().getResources().get(0);
-            new PluginGenerate(resource.getDirectory(), project.getCompileClasspathElements(), profile, logger).generate();
-        } catch (DependencyResolutionRequiredException | IOException | SQLException | URISyntaxException e) {
+            new PluginGenerate(resource.getDirectory(), project.getCompileClasspathElements(), profile, logger).execute();
+        } catch (DependencyResolutionRequiredException | PluginExecutionException e) {
             logger.error(e.getMessage());
             throw new MojoExecutionException(e.getMessage());
         }

@@ -25,10 +25,12 @@ public class ValidateMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException {
         try {
-            new PluginValidate(project.getBasedir().getAbsolutePath(), project.getCompileClasspathElements(), profile, logger).validate();
-        } catch (DependencyResolutionRequiredException ex) {
-            logger.error(ex.getMessage());
+            new PluginValidate(project.getBasedir().getAbsolutePath(), project.getCompileClasspathElements(), profile, logger).execute();
+        } catch (DependencyResolutionRequiredException | PluginExecutionException e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
         }
+
     }
 
 }
