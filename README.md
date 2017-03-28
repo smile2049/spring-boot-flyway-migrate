@@ -83,11 +83,11 @@ TODO
 
 <!---
 ```bash
-gradle spring-boot-flyway-migrate:goal -Dproperty=value
+gradle flyway<Goal> -Dproperty=value
 ```
 --->
 
-## Goals/tasks
+## Goals
 
 **generate**: generates Flyway migrations between your project's Hibernate entities and database
 
@@ -101,9 +101,15 @@ gradle spring-boot-flyway-migrate:goal -Dproperty=value
 
 ## Examples
 
+**Maven**
+
 ```bash
 mvn com.github.tom-power.spring-boot-flyway-migrate:maven-plugin:generate -Dprofile=dev
 ```
+
+**Gradle**
+
+TODO
 
 ## Notes
 
