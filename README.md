@@ -21,11 +21,6 @@ Add the plugin and JitPack plugin repository to your POM:
       <version>0.2.1</version>
     </plugin>
   </plugins>
-</project>
-```
-
-```xml
-<project>
   ...
   <pluginRepositories>
     ...
@@ -36,6 +31,7 @@ Add the plugin and JitPack plugin repository to your POM:
   </pluginRepositories>
 </project>
 ```
+
 
 **Gradle**
 
@@ -104,7 +100,7 @@ gradle flyway<Goal> -Dproperty=value
 **Maven**
 
 ```bash
-mvn com.github.tom-power.spring-boot-flyway-migrate:maven-plugin:generate -Dprofile=dev
+mvn spring-boot-flyway-migrate:generate -Dprofile=dev
 ```
 
 **Gradle**
@@ -117,9 +113,9 @@ Migrations are generated using hbm2ddl.auto update, because of this they *should
 
 Generated migrations won't contain destructive commands. If you want to use these you'll need to add them manually, though please see Flyway documentation about *lack of support for downward migrations* and *maintaining backwards compatibility* between your project and database. [link](http://flywaydb.org/documentation/faq.html#downgrade)
 
-Migrations are written in the format expected by Spring Boot and to the location specified in the project configuration, including where profile and vendor specific directories are specified  [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup). 
+Migrations are written in the format expected by Spring Boot and to the location specified in the project configuration, including profile and vendor specific locations. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
 
-Migrations will be *run against your database automatically* on Spring Boot project startup if you have Flyway as a dependency. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
+Because of this migrations will be *run against your database automatically* on Spring Boot project startup if you have Flyway as a dependency. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
 
 ## Database support
 
