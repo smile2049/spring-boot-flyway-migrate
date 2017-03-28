@@ -49,7 +49,7 @@ public class PluginGenerate extends PluginAbs {
     protected void init() throws PluginExecutionException {
         try {
             super.init();
-            Flyway flyway = FlywayFactory.create(new String[]{migration.getDirectory()}, resources.getClassloader(), properties);
+            Flyway flyway = FlywayFactory.create(migration.getDirectory(), resources.getClassloader(), properties);
             Hibernate hibernate = new HibernateFactory(properties, resources.getUrls()).create();
             generate = new Generate(hibernate, flyway);
             writer = new Writer();

@@ -7,14 +7,14 @@ import org.flywaydb.core.Flyway;
 
 public class PluginValidate extends PluginAbs {
 
-    public PluginValidate(String resourceBaseDir, List<String> paths, String profile, FlywayMigrateLogger logger) {
-        super(resourceBaseDir, paths, profile, logger);
+    public PluginValidate(String baseDir, List<String> paths, String profile, FlywayMigrateLogger logger) {
+        super(baseDir, paths, profile, logger);
     }
 
     @Override
     public void execute() throws PluginExecutionException {
         init();
-        Flyway flyway = FlywayFactory.create(new String[]{migration.getDirectory()}, resources.getClassloader(), properties);
+        Flyway flyway = FlywayFactory.create(migration.getDirectory(), resources.getClassloader(), properties);
         flyway.validate();
         logger.info(Messages.VALIDATION_SUCCESSFUL);
     }

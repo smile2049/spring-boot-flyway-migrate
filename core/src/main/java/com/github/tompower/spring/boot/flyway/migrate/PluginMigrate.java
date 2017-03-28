@@ -13,7 +13,7 @@ public class PluginMigrate extends PluginAbs {
 
     public void execute() throws PluginExecutionException {
         init();
-        Flyway flyway = FlywayFactory.create(new String[]{migration.getDirectory()}, resources.getClassloader(), properties);
+        Flyway flyway = FlywayFactory.create(migration.getDirectory(), resources.getClassloader(), properties);
         int migrations = flyway.migrate();
         logger.info(Messages.MIGRATION_SUCCESSFUL + Messages.getMigrationMessage(migrations));
     }

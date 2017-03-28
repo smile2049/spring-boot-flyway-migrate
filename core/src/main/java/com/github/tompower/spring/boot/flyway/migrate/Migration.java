@@ -7,11 +7,11 @@ import org.springframework.boot.jdbc.DatabaseDriver;
 public class Migration {
 
     private final Properties properties;
-    private final String resourceBaseDir;
+    private final String baseDir;
 
-    public Migration(Properties properties, String resourceBaseDir) {
+    public Migration(Properties properties, String baseDir) {
         this.properties = properties;
-        this.resourceBaseDir = resourceBaseDir;
+        this.baseDir = baseDir;
     }
 
     /**
@@ -32,12 +32,15 @@ public class Migration {
      * @return
      */
     public String getDirectory() {
-        return resourceBaseDir + "/" + getDirectoryBase() + getVendorDirectory() + "/";
+        return baseDir + "/" + getMigrationDirectory();
+    }
 
+    private String getMigrationDirectory() {
+        return getDirectoryBase() + getVendorDirectory() + "/";
     }
 
     private String getDirectoryBase() {
-        return !"".equals(getFlywayLocationsDirectory()) ? getFlywayLocationsDirectory() : MigrationValues.DEFAULT_MIGRATION_DIRECTORY;
+        return !"".equals(getFlywayLocationsDirectory()) ? getFlywayLocationsDirectory() : MigrationValues.DEFAULT_MIGRATION_DIRECTORY + "/";
     }
 
     private String getFlywayLocationsDirectory() {
@@ -45,7 +48,7 @@ public class Migration {
     }
 
     private String getVendorDirectory() {
-        return isVendor() ? getVendor() : "";
+        return isVendor() ? getVendor() + "/": "";
     }
 
     private String getVendor() {

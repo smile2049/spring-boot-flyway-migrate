@@ -10,12 +10,12 @@ public class Properties {
 
     public String getUrl() {
         String url = properties.getProperty(PropertiesValues.JDBC_URL);
-        return url != null ? url : PropertiesValues.DEFAULT_URL;
+        return url != null ? url : PropertiesValues.H2_URL;
     }
 
     public String getDriver() {
         String driver = properties.getProperty(PropertiesValues.DRIVER_CLASS);
-        return driver != null ? driver : PropertiesValues.DEFAULT_DRIVER;
+        return driver != null ? driver : PropertiesValues.H2_DRIVER;
     }
 
     public String getUser() {
