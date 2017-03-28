@@ -1,6 +1,6 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
-import org.apache.maven.artifact.DependencyResolutionRequiredException;
+import com.github.tompower.spring.boot.flyway.migrate.helper.SpringBootFlywayMigrateAbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -19,12 +19,7 @@ public class GenerateMojo extends SpringBootFlywayMigrateAbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException {
-        try {
-            new PluginGenerate(getResourceDirectory(project), getTargetDirectory(project), project.getCompileClasspathElements(), profile, logger).execute();
-        } catch (DependencyResolutionRequiredException | PluginExecutionException e) {
-            logger.error(e.getMessage());
-            throw new MojoExecutionException(e.getMessage());
-        }
+        super.execute(new PluginGenerate(), project, profile);
     }
 
 }

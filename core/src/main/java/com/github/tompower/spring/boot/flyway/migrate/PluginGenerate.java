@@ -1,21 +1,16 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
-import com.github.tompower.spring.boot.flyway.migrate.messages.FlywayMigrateLogger;
-import com.github.tompower.spring.boot.flyway.migrate.messages.Messages;
+import com.github.tompower.spring.boot.flyway.migrate.helper.Messages;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class PluginGenerate extends PluginAbs {
+public class PluginGenerate extends Plugin {
 
     private Generate generate;
     private Writer writer;
-
-    public PluginGenerate(String resourceBaseDir, String targetDir, List<String> paths, String profile, FlywayMigrateLogger logger) {
-        super(resourceBaseDir, targetDir, paths, profile, logger);
-    }
 
     @Override
     public void execute() throws PluginExecutionException {

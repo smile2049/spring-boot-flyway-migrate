@@ -1,4 +1,4 @@
-package com.github.tompower.spring.boot.flyway.migrate;
+package com.github.tompower.spring.boot.flyway.migrate.helper;
 
 import java.io.File;
 import java.util.Collections;

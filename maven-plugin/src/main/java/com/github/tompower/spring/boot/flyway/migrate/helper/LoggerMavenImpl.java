@@ -1,4 +1,4 @@
-package com.github.tompower.spring.boot.flyway.migrate.messages;
+package com.github.tompower.spring.boot.flyway.migrate.helper;
 
 
 

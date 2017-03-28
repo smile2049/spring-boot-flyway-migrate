@@ -1,21 +1,21 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
-import com.github.tompower.spring.boot.flyway.migrate.messages.FlywayMigrateLogger;
+import com.github.tompower.spring.boot.flyway.migrate.helper.FlywayMigrateLogger;
 import com.github.tompower.spring.boot.flyway.migrate.properties.Properties;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 import org.flywaydb.core.Flyway;
 
-public abstract class PluginAbs {
+public abstract class Plugin {
 
-    protected final String resourcesDir;
-    protected final String targetDir;
-    protected final List<String> paths;
-    protected final String profile;
-    protected final FlywayMigrateLogger logger;
+    protected String resourcesDir;
+    protected String targetDir;
+    protected List<String> paths;
+    protected String profile;
+    protected FlywayMigrateLogger logger;
 
-    public PluginAbs(String resourcesDir, String targetDir, List<String> paths, String profile, FlywayMigrateLogger logger) {
+    public void setup(String resourcesDir, String targetDir, List<String> paths, String profile, FlywayMigrateLogger logger) {
         this.resourcesDir = resourcesDir;
         this.targetDir = targetDir;
         this.paths = paths;
@@ -35,7 +35,7 @@ public abstract class PluginAbs {
             resources = Resources.getInstance(paths);
             properties = resources.getProperties(profile);
             migration = new Migration(properties, resourcesDir, targetDir);
-            flyway = FlywayFactory.create(migration.getResourcesDirectory(), resources.getClassloader(), properties);
+            flyway = FlywayFactory.create(migration.getTargetDirectory(), resources.getClassloader(), properties);
         } catch (IOException | URISyntaxException e) {
             throw new PluginExecutionException(e.getMessage());
         }
