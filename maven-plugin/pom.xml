@@ -4,12 +4,12 @@
     <parent>
         <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
         <artifactId>spring-boot-flyway-migrate</artifactId>
-        <version>0.2</version>
+        <version>0.2.1</version>
     </parent>
     <artifactId>maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
     <name>Spring Boot Flyway Migrate Maven Plugin</name>
-    <version>0.2</version>
+    <version>0.2.1</version>
     <dependencies>
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
             <artifactId>core</artifactId>
-            <version>0.2</version>
+            <version>0.2.1</version>
         </dependency>
     </dependencies>
     <build>

@@ -78,14 +78,14 @@ public class PropertiesProviderTest {
         makeFile(DEV, PROPERTIES);
         Properties properties = propertiesProvider.getProperties(getFiles(), DEV);
         assertNotNull(properties);
-        assertEquals(PropertiesValues.DEFAULT_URL, properties.getUrl());
+        assertEquals(PropertiesValues.H2_URL, properties.getUrl());
     }
     @Test
     public void testReadProfileApplicationYamlWithBlankEntry() throws Exception {
         makeFile(DEV, YAML);
         Properties properties = propertiesProvider.getProperties(getFiles(), DEV);
         assertNotNull(properties);
-        assertEquals(PropertiesValues.DEFAULT_URL, properties.getUrl());
+        assertEquals(PropertiesValues.H2_URL, properties.getUrl());
     }
 
     private void setupProperties(String profile, String extension) throws IOException {

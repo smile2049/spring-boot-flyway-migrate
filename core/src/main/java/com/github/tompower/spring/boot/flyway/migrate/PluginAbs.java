@@ -8,13 +8,13 @@ import java.util.List;
 
 public abstract class PluginAbs {
 
-    protected final String resourceBaseDir;
+    protected final String baseDir;
     protected final List<String> paths;
     protected final String profile;
     protected final FlywayMigrateLogger logger;
 
-    public PluginAbs(String resourceBaseDir, List<String> paths, String profile, FlywayMigrateLogger logger) {
-        this.resourceBaseDir = resourceBaseDir;
+    public PluginAbs(String baseDir, List<String> paths, String profile, FlywayMigrateLogger logger) {
+        this.baseDir = baseDir;
         this.paths = paths;
         this.profile = profile;
         this.logger = logger;
@@ -30,7 +30,7 @@ public abstract class PluginAbs {
         try {
             resources = Resources.getInstance(paths);
             properties = resources.getProperties(profile);
-            migration = new Migration(properties, resourceBaseDir);
+            migration = new Migration(properties, baseDir);
         } catch (IOException | URISyntaxException e) {
             throw new PluginExecutionException(e.getMessage());
         }

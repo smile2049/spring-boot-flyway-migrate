@@ -5,13 +5,17 @@ import org.flywaydb.core.Flyway;
 
 public class FlywayFactory {
 
-    public static Flyway create(String[] locations, ClassLoader classLoader, Properties properties) {
+    public static Flyway create(String directory, ClassLoader classLoader, Properties properties) {
         Flyway flyway = new Flyway();
-        flyway.setLocations(locations);
+        flyway.setLocations(getLocations(directory));
         flyway.setClassLoader(classLoader);
         flyway.setDataSource(properties.getUrl(), properties.getUser(), properties.getPass());
         flyway.setBaselineOnMigrate(true);
         return flyway;
+    }
+
+    private static String[] getLocations(String directory) {
+        return new String[]{"filesystem:" + directory};
     }
 
 }

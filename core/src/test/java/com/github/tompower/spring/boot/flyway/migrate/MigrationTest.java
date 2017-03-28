@@ -19,15 +19,15 @@ public class MigrationTest {
     @Test
     public void testVendorDirectory() throws Exception {
         Migration defaultVendorMigration = getMigration(getProperties(getDefaultVendorProperties()));
-        assertEquals(defaultDir + "derby/", defaultVendorMigration.getDirectory());
+        assertEquals(defaultDir + "h2/", defaultVendorMigration.getDirectory());
     }
 
     private java.util.Properties getDefaultVendorProperties() {
         java.util.Properties properties = new java.util.Properties();
         String vendorFlywayLocation = MigrationValues.DEFAULT_MIGRATION_DIRECTORY + "/" + MigrationValues.VENDOR;
         properties.setProperty(PropertiesValues.FLYWAY_LOCATIONS, vendorFlywayLocation);
-        properties.setProperty(PropertiesValues.JDBC_URL, PropertiesValues.DEFAULT_URL);
-        properties.setProperty(PropertiesValues.DRIVER_CLASS, PropertiesValues.DEFAULT_DRIVER);
+        properties.setProperty(PropertiesValues.JDBC_URL, PropertiesValues.H2_URL);
+        properties.setProperty(PropertiesValues.DRIVER_CLASS, PropertiesValues.H2_DRIVER);
         return properties;
     }
 

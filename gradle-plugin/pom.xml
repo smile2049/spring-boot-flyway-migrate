@@ -4,11 +4,11 @@
     <parent>
         <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
         <artifactId>spring-boot-flyway-migrate</artifactId>
-        <version>0.2</version>
+        <version>0.2.1</version>
     </parent>
     <artifactId>gradle-plugin</artifactId>
     <name>Spring Boot Flyway Migrate Gradle Plugin</name>
-    <version>0.2</version>
+    <version>0.2.1</version>
     <properties>
         <gradle.version>2.9</gradle.version>
     </properties>
@@ -16,7 +16,7 @@
         <dependency>
             <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
             <artifactId>core</artifactId>
-            <version>0.2</version>
+            <version>0.2.1</version>
         </dependency>
         <dependency>
             <groupId>io.spring.gradle</groupId>
