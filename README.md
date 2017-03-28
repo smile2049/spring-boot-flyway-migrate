@@ -1,12 +1,14 @@
 ## Introduction
 
-Plugins to generate and run Flyway migrations in Spring Boot projects using Hibernate.
+Plugins to **generate** and manage [Flyway](https://flywaydb.org/) migrations in [Spring Boot](https://projects.spring.io/spring-boot/) projects using [Hibernate](http://hibernate.org/). 
+
+Any feedback very welcome!
 
 ## Installation
 
 **Maven**
 
-Add the plugin and Jitpack plugin repository to your POM:
+Add the plugin and JitPack plugin repository to your POM:
 
 ```xml
 <project>
@@ -39,7 +41,7 @@ Add the plugin and Jitpack plugin repository to your POM:
 
 TODO 
 <!---
-Add the plugin, buildscript and Jitpack repository to your build.gradle:
+Add the plugin, buildscript and JitPack repository to your build.gradle:
 
 ```gradle
 apply plugin: 'spring-boot-flyway-migrate-gradle-plugin'
@@ -63,17 +65,29 @@ repositories {
 
 ## Configuration
 
-Database configuration for the plugin is picked up from your Spring Boot configuration files, .properties and .yaml files are currently supported. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-application-property-files)
+Configuration for the plugin is picked up from your Spring Boot [configuration files](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-application-property-files).
 
 ## Running
+
+**Maven**
 
 On command line: 
 
 ```bash
-mvn com.github.tom-power.spring-boot-flyway-migrate:maven-plugin:goal -Dkey=value
+mvn spring-boot-flyway-migrate:goal -Dproperty=value
 ```
 
-## Goals
+**Gradle**
+
+TODO
+
+<!---
+```bash
+gradle spring-boot-flyway-migrate:goal -Dproperty=value
+```
+--->
+
+## Goals/tasks
 
 **generate**: generates Flyway migrations between your project's Hibernate entities and database
 
@@ -85,7 +99,13 @@ mvn com.github.tom-power.spring-boot-flyway-migrate:maven-plugin:goal -Dkey=valu
 
 **profile**: if set the goal will use the profile specific properties file for database configuration [link](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties), otherwise application.properties/application.yaml will be used
 
-## Notes on goals
+## Examples
+
+```bash
+mvn com.github.tom-power.spring-boot-flyway-migrate:maven-plugin:generate -Dprofile=dev
+```
+
+## Notes
 
 Migrations are generated using hbm2ddl.auto update, because of this they *should be reviewed before running against your database*. [link](http://stackoverflow.com/questions/221379/hibernate-hbm2ddl-auto-update-in-production)
 
@@ -100,8 +120,8 @@ Migrations will be *run against your database automatically* on Spring Boot proj
 **Hibernate** https://developer.jboss.org/wiki/SupportedDatabases2<br/>
 **Flyway** http://flywaydb.org/documentation/
 
-Dependencies for MySQL and H2 are included, additional dependencies can be added in your project as needed. [link](https://maven.apache.org/guides/mini/guide-configuring-plugins.html#Using_the_dependencies_Tag)
+Dependencies for MySQL and H2 are included, additional dependencies can be added to your project as needed ([maven](https://maven.apache.org/guides/mini/guide-configuring-plugins.html#Using_the_dependencies_Tag)).
 
-## Other
+## Links
 
 Please see these repositories for [samples](https://github.com/tom-power/spring-boot-flyway-migrate-samples) and [integration tests](https://github.com/tom-power/spring-boot-flyway-migrate-integration-tests).

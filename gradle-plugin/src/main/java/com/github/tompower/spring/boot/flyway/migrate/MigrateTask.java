@@ -12,7 +12,7 @@ public class MigrateTask extends SpringBootFlywayMigrateTask {
         try {
             List<String> paths = getPaths(getProject());
             FlywayMigrateLogger logger = new LoggerGradleImpl(getLogger());
-            new PluginMigrate(getProject().getRootDir().getAbsolutePath(), paths, profile, logger).execute();
+            new PluginMigrate(getResourcesDir(), getTargetDir(), paths, profile, logger).execute();
         } catch (PluginExecutionException e) {
             e.printStackTrace();
         }

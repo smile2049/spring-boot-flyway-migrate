@@ -24,7 +24,7 @@ public class MigrateMojo extends SpringBootFlywayMigrateAbstractMojo {
     @Override
     public void execute() throws MojoExecutionException {
         try {
-            new PluginMigrate(getResourceDirectory(project), project.getCompileClasspathElements(), profile, logger).execute();
+            new PluginMigrate(getResourceDirectory(project), getTargetDirectory(project), project.getCompileClasspathElements(), profile, logger).execute();
         } catch (DependencyResolutionRequiredException | PluginExecutionException e) {
             logger.error(e.getMessage());
         }

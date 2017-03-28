@@ -24,7 +24,7 @@ public class ValidateMojo extends SpringBootFlywayMigrateAbstractMojo {
     @Override
     public void execute() throws MojoExecutionException {
         try {
-            new PluginValidate(getResourceDirectory(project), project.getCompileClasspathElements(), profile, logger).execute();
+            new PluginValidate(getResourceDirectory(project), getTargetDirectory(project), project.getCompileClasspathElements(), profile, logger).execute();
         } catch (DependencyResolutionRequiredException | PluginExecutionException e) {
             logger.error(e.getMessage());
             e.printStackTrace();

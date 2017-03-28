@@ -7,19 +7,20 @@ import org.junit.Test;
 
 public class MigrationTest {
 
-    private String baseDir = "/baseDir";
+    private String baseDir = "/resourcesDir";
+    private String targetDir = "/targetDir";
     private String defaultDir = baseDir + "/" + MigrationValues.DEFAULT_MIGRATION_DIRECTORY + "/";
 
     @Test
     public void testDefaultDirectory() throws Exception {
         Migration blankMigration = getMigration(getBlankProperties());
-        assertEquals(defaultDir, blankMigration.getDirectory());
+        assertEquals(defaultDir, blankMigration.getResourcesDirectory());
     }
 
     @Test
     public void testVendorDirectory() throws Exception {
         Migration defaultVendorMigration = getMigration(getProperties(getDefaultVendorProperties()));
-        assertEquals(defaultDir + "h2/", defaultVendorMigration.getDirectory());
+        assertEquals(defaultDir + "h2/", defaultVendorMigration.getResourcesDirectory());
     }
 
     private java.util.Properties getDefaultVendorProperties() {
@@ -32,7 +33,7 @@ public class MigrationTest {
     }
 
     private Migration getMigration(Properties properties) {
-        return new Migration(properties, baseDir);
+        return new Migration(properties, baseDir, targetDir);
     }
 
     private Properties getBlankProperties() {

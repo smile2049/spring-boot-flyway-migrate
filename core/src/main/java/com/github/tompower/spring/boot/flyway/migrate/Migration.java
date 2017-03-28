@@ -7,11 +7,13 @@ import org.springframework.boot.jdbc.DatabaseDriver;
 public class Migration {
 
     private final Properties properties;
-    private final String baseDir;
+    private final String resourcesDir;
+    private final String targetDir;
 
-    public Migration(Properties properties, String baseDir) {
+    public Migration(Properties properties, String resourcesDir, String targetDir) {
         this.properties = properties;
-        this.baseDir = baseDir;
+        this.resourcesDir = resourcesDir;
+        this.targetDir = targetDir;
     }
 
     /**
@@ -20,7 +22,7 @@ public class Migration {
      * @return File
      */
     public File getFile(Integer version) {
-        return new File(getDirectory() + getMigrationFile(version));
+        return new File(getResourcesDirectory() + getMigrationFile(version));
     }
 
     private String getMigrationFile(Integer version) {
@@ -31,8 +33,15 @@ public class Migration {
      * Get Flyway Migration directory
      * @return
      */
-    public String getDirectory() {
-        return baseDir + "/" + getMigrationDirectory();
+    public String getResourcesDirectory() {
+        return resourcesDir + "/" + getMigrationDirectory();
+    }
+    /**
+     * Get Flyway Migration target directory
+     * @return
+     */
+    public String getTargetDirectory() {
+        return targetDir + "/" + getMigrationDirectory();
     }
 
     private String getMigrationDirectory() {

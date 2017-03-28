@@ -20,7 +20,7 @@ public class GenerateMojo extends SpringBootFlywayMigrateAbstractMojo {
     @Override
     public void execute() throws MojoExecutionException {
         try {
-            new PluginGenerate(getResourceDirectory(project), project.getCompileClasspathElements(), profile, logger).execute();
+            new PluginGenerate(getResourceDirectory(project), getTargetDirectory(project), project.getCompileClasspathElements(), profile, logger).execute();
         } catch (DependencyResolutionRequiredException | PluginExecutionException e) {
             logger.error(e.getMessage());
             throw new MojoExecutionException(e.getMessage());

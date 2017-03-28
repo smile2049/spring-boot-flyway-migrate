@@ -43,4 +43,11 @@ public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
         return plugin.getSourceSets();
     }
 
+    protected String getResourcesDir() {
+        return getProject().getRootDir().getAbsolutePath();
+    }
+
+    protected String getTargetDir() {
+        return getProject().getBuildDir().getAbsolutePath();
+    }
 }

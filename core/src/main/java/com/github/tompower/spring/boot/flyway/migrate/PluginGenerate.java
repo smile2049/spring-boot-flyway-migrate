@@ -7,15 +7,14 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.List;
-import org.flywaydb.core.Flyway;
 
 public class PluginGenerate extends PluginAbs {
 
     private Generate generate;
     private Writer writer;
 
-    public PluginGenerate(String resourceBaseDir, List<String> paths, String profile, FlywayMigrateLogger logger) {
-        super(resourceBaseDir, paths, profile, logger);
+    public PluginGenerate(String resourceBaseDir, String targetDir, List<String> paths, String profile, FlywayMigrateLogger logger) {
+        super(resourceBaseDir, targetDir, paths, profile, logger);
     }
 
     @Override
@@ -49,7 +48,6 @@ public class PluginGenerate extends PluginAbs {
     protected void init() throws PluginExecutionException {
         try {
             super.init();
-            Flyway flyway = FlywayFactory.create(migration.getDirectory(), resources.getClassloader(), properties);
             Hibernate hibernate = new HibernateFactory(properties, resources.getUrls()).create();
             generate = new Generate(hibernate, flyway);
             writer = new Writer();
