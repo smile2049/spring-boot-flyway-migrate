@@ -1,6 +1,6 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
-import com.github.tompower.spring.boot.flyway.migrate.helper.SpringBootFlywayMigrateAbstractMojo;
+import com.github.tompower.spring.boot.flyway.migrate.helper.SpringBootFlywayMigrateMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -10,7 +10,7 @@ import org.apache.maven.project.MavenProject;
  * Generate Flyway migrations
  */
 @Mojo(name = "generate")
-public class GenerateMojo extends SpringBootFlywayMigrateAbstractMojo {
+public class GenerateMojo extends SpringBootFlywayMigrateMojo {
 
     @Parameter(defaultValue = "${project}", readonly = true, required = true)
     private MavenProject project;
