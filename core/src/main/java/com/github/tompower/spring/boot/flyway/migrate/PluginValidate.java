@@ -6,8 +6,12 @@ public class PluginValidate extends Plugin {
 
     @Override
     public void execute() throws PluginExecutionException {
-        init();
         flyway.validate();
         logger.info(Messages.VALIDATION_SUCCESSFUL);
+    }
+
+    @Override
+    protected void init() throws PluginExecutionException {
+        super.defaultInit();
     }
 }

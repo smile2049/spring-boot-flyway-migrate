@@ -9,28 +9,31 @@ import org.flywaydb.core.Flyway;
 
 public abstract class Plugin {
 
-    protected String resourcesDir;
-    protected String targetDir;
-    protected List<String> paths;
-    protected String profile;
+    public abstract void execute() throws PluginExecutionException;
+
+    private String resourcesDir;
+    private String targetDir;
+    private List<String> paths;
+    private String profile;
     protected FlywayMigrateLogger logger;
 
-    public void setup(String resourcesDir, String targetDir, List<String> paths, String profile, FlywayMigrateLogger logger) {
+    public void setup(String resourcesDir, String targetDir, List<String> paths, String profile, FlywayMigrateLogger logger) throws PluginExecutionException {
         this.resourcesDir = resourcesDir;
         this.targetDir = targetDir;
         this.paths = paths;
         this.profile = profile;
         this.logger = logger;
+        init();
     }
 
-    protected Resources resources;
-    protected Migration migration;
-    protected Properties properties;
-    protected Flyway flyway;
+    protected abstract void init() throws PluginExecutionException;
 
-    public abstract void execute() throws PluginExecutionException;
+    Resources resources;
+    Migration migration;
+    Properties properties;
+    Flyway flyway;
 
-    protected void init() throws PluginExecutionException {
+    void defaultInit() throws PluginExecutionException {
         try {
             resources = Resources.getInstance(paths);
             properties = resources.getProperties(profile);

@@ -15,13 +15,11 @@ public class PluginGenerate extends Plugin {
     @Override
     public void execute() throws PluginExecutionException {
         try {
-            init();
             List<String> updates = generate.getUpdates();
             if (!updates.isEmpty()) {
                 File file = migration.getFile(generate.getCurrentVersion() + 1);
                 if (!file.exists()) {
-                    file.getParentFile().mkdirs();
-                    if (!file.createNewFile()) {
+                    if (!file.getParentFile().mkdirs() || !file.createNewFile()) {
                         logger.error(Messages.CANNOT_CREATE + file.getAbsolutePath());
                     }
                     writer.write(updates, file);
@@ -42,7 +40,7 @@ public class PluginGenerate extends Plugin {
     @Override
     protected void init() throws PluginExecutionException {
         try {
-            super.init();
+            super.defaultInit();
             Hibernate hibernate = new HibernateFactory(properties, resources.getUrls()).create();
             generate = new Generate(hibernate, flyway);
             writer = new Writer();
