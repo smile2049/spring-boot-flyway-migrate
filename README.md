@@ -63,7 +63,7 @@ repositories {
 
 ## Configuration
 
-Configuration for the plugin is picked up from your Spring Boot [configuration files](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-application-property-files), specifically the database configuration properties and flyway.locations.
+Configuration for the plugin is picked up from your Spring Boot [configuration files](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-application-property-files), specifically the database configuration and flyway.locations properties.
 
 ## Running
 
@@ -115,16 +115,18 @@ Migrations are generated using hbm2ddl.auto update, because of this they *should
 
 Generated migrations won't contain destructive commands. If you want to use these you'll need to add them manually, though please see Flyway documentation about *lack of support for downward migrations* and *maintaining backwards compatibility* between your project and database. [link](http://flywaydb.org/documentation/faq.html#downgrade)
 
-Migrations are generated in the format expected by Spring Boot and to the location specified in the project configuration, including profile and vendor specific locations. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
+Migrations are generated in the format/location expected by Spring Boot. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
 
 Because of this generated migrations will be *run against your database automatically* on Spring Boot project startup if you have Flyway as a project dependency. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
+
+The plugin's commands use your project's compiled classes and files, so please ensure your project is built before running them.
 
 ## Database support
 
 **Hibernate** https://developer.jboss.org/wiki/SupportedDatabases2<br/>
 **Flyway** http://flywaydb.org/documentation/
 
-Dependencies for MySQL and H2 are included, additional dependencies can be added to your project as needed ([maven](https://maven.apache.org/guides/mini/guide-configuring-plugins.html#Using_the_dependencies_Tag)).
+Dependencies for MySQL and H2 are included, additional dependencies can be added to your project as needed. [maven](https://maven.apache.org/guides/mini/guide-configuring-plugins.html#Using_the_dependencies_Tag)
 
 ## Links
 
