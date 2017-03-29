@@ -1,6 +1,8 @@
 ## Introduction
 
-Plugins to **generate** and manage [Flyway](https://flywaydb.org/) migrations in [Spring Boot](https://projects.spring.io/spring-boot/) projects using [Hibernate](http://hibernate.org/). 
+Plugins for managing [Flyway](https://flywaydb.org/) migrations in [Spring Boot](https://projects.spring.io/spring-boot/) projects. 
+
+Includes commands to **generate** [Flyway](https://flywaydb.org/) migrations from changes to your [Hibernate](http://hibernate.org/) entities. 
 
 Any feedback very welcome!
 
@@ -61,7 +63,7 @@ repositories {
 
 ## Configuration
 
-Configuration for the plugin is picked up from your Spring Boot [configuration files](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-application-property-files).
+Configuration for the plugin is picked up from your Spring Boot [configuration files](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-application-property-files), specifically the database configuration properties and flyway.locations.
 
 ## Running
 
@@ -87,13 +89,13 @@ gradle flyway<Goal> -Dproperty=value
 
 **generate**: generates Flyway migrations between your project's Hibernate entities and database
 
-**migrate**: runs the Flyway [migrate](https://flywaydb.org/documentation/maven/migrate) command against your project's database
+**migrate**: runs the Flyway [migrate](https://flywaydb.org/documentation/maven/migrate) command
 
-**validate**: run the Flyway [validate](https://flywaydb.org/documentation/maven/validate) command against your project's database
+**validate**: runs the Flyway [validate](https://flywaydb.org/documentation/maven/validate) command
 
 ## Properties
 
-**profile**: if set the goal will use the profile specific properties file for database configuration [link](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties), otherwise application.properties/application.yaml will be used
+**profile**: if set the goal will use the profile specific properties file for database configuration [link](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties)
 
 ## Examples
 
@@ -113,9 +115,9 @@ Migrations are generated using hbm2ddl.auto update, because of this they *should
 
 Generated migrations won't contain destructive commands. If you want to use these you'll need to add them manually, though please see Flyway documentation about *lack of support for downward migrations* and *maintaining backwards compatibility* between your project and database. [link](http://flywaydb.org/documentation/faq.html#downgrade)
 
-Migrations are written in the format expected by Spring Boot and to the location specified in the project configuration, including profile and vendor specific locations. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
+Migrations are generated in the format expected by Spring Boot and to the location specified in the project configuration, including profile and vendor specific locations. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
 
-Because of this migrations will be *run against your database automatically* on Spring Boot project startup if you have Flyway as a dependency. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
+Because of this generated migrations will be *run against your database automatically* on Spring Boot project startup if you have Flyway as a project dependency. [link](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
 
 ## Database support
 
