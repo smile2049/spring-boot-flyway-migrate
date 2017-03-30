@@ -2,9 +2,8 @@ package com.github.tompower.spring.boot.flyway.migrate;
 
 import com.github.tompower.spring.boot.flyway.migrate.helper.FlywayMigrateLogger;
 import com.github.tompower.spring.boot.flyway.migrate.properties.Properties;
+import com.github.tompower.spring.boot.flyway.migrate.properties.PropertiesProvider;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.List;
 import org.flywaydb.core.Flyway;
 
 public abstract class Plugin {
@@ -13,14 +12,12 @@ public abstract class Plugin {
 
     private String resourcesDir;
     private String targetDir;
-    private List<String> paths;
     private String profile;
     protected FlywayMigrateLogger logger;
 
-    public void setup(String resourcesDir, String targetDir, List<String> paths, String profile, FlywayMigrateLogger logger) throws PluginExecutionException {
+    public void setup(String resourcesDir, String targetDir, String profile, FlywayMigrateLogger logger) throws PluginExecutionException {
         this.resourcesDir = resourcesDir;
         this.targetDir = targetDir;
-        this.paths = paths;
         this.profile = profile;
         this.logger = logger;
         init();
@@ -35,11 +32,12 @@ public abstract class Plugin {
 
     void defaultInit() throws PluginExecutionException {
         try {
-            resources = Resources.getInstance(paths);
-            properties = resources.getProperties(profile);
+            resources = new Resources(targetDir);
+            PluginClassloader.updateClassloader(resources.getUrls());
+            properties = PropertiesProvider.getProperties(resources.getFiles(), profile);
             migration = new Migration(properties, resourcesDir, targetDir);
-            flyway = FlywayFactory.create(migration.getTargetDirectory(), resources.getClassloader(), properties);
-        } catch (IOException | URISyntaxException e) {
+            flyway = FlywayFactory.create(migration.getTargetDirectory(), properties);
+        } catch (IOException e) {
             throw new PluginExecutionException(e.getMessage());
         }
     }

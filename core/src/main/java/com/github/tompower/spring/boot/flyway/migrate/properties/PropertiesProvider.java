@@ -23,7 +23,7 @@ public class PropertiesProvider {
      * @return Properties
      * @throws IOException
      */
-    public Properties getProperties(List<File> files, String profile) throws IOException {
+    public static Properties getProperties(List<File> files, String profile) throws IOException {
         File propertiesFile = PropertiesFinder.find(files, profile);
         PropertiesConverter propertiesConverter = new PropertiesConverterFactory(PropertiesUtils.getExtension(propertiesFile)).getPropertiesConverter();
         return new Properties(propertiesConverter.convert(propertiesFile));
