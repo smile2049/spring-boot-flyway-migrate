@@ -6,7 +6,7 @@ import org.gradle.api.tasks.TaskAction;
 public class GenerateTask extends SpringBootFlywayMigrateTask {
 
     @TaskAction
-    public void generate() {
+    public void action() {
         super.execute(new PluginGenerate());
     }
 

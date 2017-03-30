@@ -12,6 +12,8 @@ public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
     private final String profile = System.getProperty("profile");
     private FlywayMigrateLogger logger = new LoggerGradleImpl((Logger) getLog());
 
+    public abstract void action();
+
     protected void execute(Plugin plugin) {
         try {
             PluginFactory.create(plugin, getResourcesDir(), getTargetDir(), profile, logger).execute();

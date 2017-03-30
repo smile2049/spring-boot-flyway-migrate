@@ -9,6 +9,7 @@ public class SpringBootFlywayMigratePlugin implements Plugin<Project> {
     public void apply(Project project) {
         project.getTasks().create("flywayGenerate", GenerateTask.class);
         project.getTasks().create("flywayMigrate", MigrateTask.class);
+        project.getTasks().create("flywayValidate", ValidateTask.class);
     }
 
 }
