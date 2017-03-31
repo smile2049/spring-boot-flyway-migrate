@@ -20,7 +20,7 @@ Add the plugin and JitPack plugin repository to your POM:
     <plugin>
       <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
       <artifactId>maven-plugin</artifactId>
-      <version>0.2.1</version>
+      <version>0.2.2</version>
     </plugin>
   </plugins>
   ...
@@ -33,7 +33,6 @@ Add the plugin and JitPack plugin repository to your POM:
   </pluginRepositories>
 </project>
 ```
-
 
 **Gradle**
 
@@ -48,7 +47,7 @@ apply plugin: 'spring-boot-flyway-migrate-gradle-plugin'
 ```gradle
 buildscript {
     dependencies {
-        classpath("com.github.tom-power:spring-boot-flyway-migrate-gradle-plugin:0.2.1")
+        classpath("com.github.tom-power:spring-boot-flyway-migrate-gradle-plugin:0.2.2")
     }
 }
 ```

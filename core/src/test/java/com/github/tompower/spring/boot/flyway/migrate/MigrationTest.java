@@ -2,25 +2,26 @@ package com.github.tompower.spring.boot.flyway.migrate;
 
 import com.github.tompower.spring.boot.flyway.migrate.properties.Properties;
 import com.github.tompower.spring.boot.flyway.migrate.properties.PropertiesValues;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class MigrationTest {
 
     private String baseDir = "/resourcesDir";
-    private String targetDir = "/targetDir";
     private String defaultDir = baseDir + "/" + MigrationValues.DEFAULT_MIGRATION_DIRECTORY + "/";
+    private String defaultFile = MigrationValues.MIGRATION_FILE_PREFIX + "1" + MigrationValues.MIGRATION_FILE_SUFFIX;
 
     @Test
-    public void testDefaultDirectory() throws Exception {
-        Migration blankMigration = getMigration(getBlankProperties());
-        assertEquals(defaultDir, blankMigration.getResourcesDirectory());
+    public void testFile() {
+        Migration defaultMigration = getMigration(getProperties(new java.util.Properties()));
+        assertEquals(defaultDir + defaultFile, defaultMigration.getFile(1).getAbsolutePath());
     }
 
     @Test
-    public void testVendorDirectory() throws Exception {
+    public void testVendorFile() throws Exception {
         Migration defaultVendorMigration = getMigration(getProperties(getDefaultVendorProperties()));
-        assertEquals(defaultDir + "h2/", defaultVendorMigration.getResourcesDirectory());
+        assertEquals(defaultDir + "h2/" + defaultFile, defaultVendorMigration.getFile(1).getAbsolutePath());
     }
 
     private java.util.Properties getDefaultVendorProperties() {
@@ -33,11 +34,7 @@ public class MigrationTest {
     }
 
     private Migration getMigration(Properties properties) {
-        return new Migration(properties, baseDir, targetDir);
-    }
-
-    private Properties getBlankProperties() {
-        return getProperties(new java.util.Properties());
+        return new Migration(properties, baseDir);
     }
 
     private Properties getProperties(java.util.Properties properties) {

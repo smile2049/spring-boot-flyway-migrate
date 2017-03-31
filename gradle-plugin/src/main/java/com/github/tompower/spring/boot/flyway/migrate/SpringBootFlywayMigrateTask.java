@@ -1,16 +1,14 @@
-package com.github.tompower.spring.boot.flyway.migrate.helper;
+package com.github.tompower.spring.boot.flyway.migrate;
 
-import com.github.tompower.spring.boot.flyway.migrate.Plugin;
-import com.github.tompower.spring.boot.flyway.migrate.PluginExecutionException;
-import com.github.tompower.spring.boot.flyway.migrate.PluginFactory;
-import static java.rmi.server.RemoteServer.getLog;
+import com.github.tompower.spring.boot.flyway.migrate.helper.FlywayMigrateLogger;
+import com.github.tompower.spring.boot.flyway.migrate.helper.LoggerGradleImpl;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.logging.Logger;
 
 public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
 
     private final String profile = System.getProperty("profile");
-    private FlywayMigrateLogger logger = new LoggerGradleImpl((Logger) getLog());
+    private FlywayMigrateLogger logger = new LoggerGradleImpl((Logger) getLogger());
 
     public abstract void action();
 
