@@ -1,5 +1,11 @@
 package com.github.tompower.spring.boot.flyway.migrate.properties;
 
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
+import org.yaml.snakeyaml.Yaml;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -8,13 +14,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.yaml.snakeyaml.Yaml;
 
 public class PropertiesProviderTest {
 
@@ -67,7 +69,6 @@ public class PropertiesProviderTest {
         assertPropertiesOk(properties, DEV);
     }
 
-
     private void assertPropertiesOk(Properties properties, String profile) {
         assertNotNull(properties);
         assertEquals(getUrl(profile), properties.getUrl());
@@ -80,6 +81,7 @@ public class PropertiesProviderTest {
         assertNotNull(properties);
         assertEquals(PropertiesValues.H2_URL, properties.getUrl());
     }
+
     @Test
     public void testReadProfileApplicationYamlWithBlankEntry() throws Exception {
         makeFile(DEV, YAML);

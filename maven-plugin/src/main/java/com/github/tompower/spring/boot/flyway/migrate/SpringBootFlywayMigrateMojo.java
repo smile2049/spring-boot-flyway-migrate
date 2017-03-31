@@ -13,11 +13,11 @@ public abstract class SpringBootFlywayMigrateMojo extends AbstractMojo {
 
     protected void execute(Plugin plugin, MavenProject project, String profile) throws MojoExecutionException {
         try {
-            PluginFactory.create(   plugin,
-                                    getResourceDirectory(project),
-                                    getTargetDirectory(project),
-                                    profile,
-                                    logger).execute();
+            PluginFactory.create(plugin,
+                    getResourceDirectory(project),
+                    getBuildDirectory(project),
+                    profile,
+                    logger).execute();
         } catch (PluginExecutionException e) {
             logger.error(e.getMessage());
             e.printStackTrace();
@@ -30,7 +30,7 @@ public abstract class SpringBootFlywayMigrateMojo extends AbstractMojo {
         return resource.getDirectory();
     }
 
-    private String getTargetDirectory(MavenProject project) {
+    private String getBuildDirectory(MavenProject project) {
         return project.getBuild().getOutputDirectory();
     }
 

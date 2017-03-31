@@ -1,12 +1,13 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
+import org.hibernate.engine.jdbc.internal.FormatStyle;
+import org.hibernate.engine.jdbc.internal.Formatter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.List;
-import org.hibernate.engine.jdbc.internal.FormatStyle;
-import org.hibernate.engine.jdbc.internal.Formatter;
 
 public class Writer {
 

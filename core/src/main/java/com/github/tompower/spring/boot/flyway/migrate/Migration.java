@@ -16,6 +16,7 @@ public class Migration {
 
     /**
      * Get file for Flyway Migration
+     *
      * @param version
      * @return File
      */

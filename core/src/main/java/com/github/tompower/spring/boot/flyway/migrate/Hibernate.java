@@ -1,15 +1,16 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
-import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.SQLException;
-import javax.persistence.EntityManagerFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.tool.hbm2ddl.DatabaseMetadata;
+
+import javax.persistence.EntityManagerFactory;
+import java.lang.reflect.Field;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class Hibernate {
 

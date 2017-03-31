@@ -33,11 +33,20 @@ public class Properties {
         return password != null ? password : "";
     }
 
+    /**
+     * Get flyway locations including {vendor} directory updates
+     *
+     * @return
+     */
     public String[] getFlywayLocations() {
-        String flywayLocations = properties.getProperty(PropertiesValues.FLYWAY_LOCATIONS);
-        return Arrays.stream(flywayLocations != null ? flywayLocations.split(",") : new String[] {""})
+        return Arrays.stream(getPropertiesFlywayLocations())
                 .map(fl -> fl.replace(MigrationValues.VENDOR, getVendor()))
                 .toArray(String[]::new);
+    }
+
+    private String[] getPropertiesFlywayLocations() {
+        String flywayLocations = properties.getProperty(PropertiesValues.FLYWAY_LOCATIONS);
+        return flywayLocations != null ? flywayLocations.split(",") : new String[]{""};
     }
 
     private String getVendor() {

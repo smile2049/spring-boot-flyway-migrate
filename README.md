@@ -2,7 +2,7 @@
 
 Plugins for managing [Flyway](https://flywaydb.org/) migrations in [Spring Boot](https://projects.spring.io/spring-boot/) projects. 
 
-Includes commands to **generate** [Flyway](https://flywaydb.org/) migrations from changes to your [Hibernate](http://hibernate.org/) entities. 
+Includes a goal to **generate** [Flyway](https://flywaydb.org/) migrations from changes to your [Hibernate](http://hibernate.org/) entities. 
 
 Any feedback very welcome!
 
@@ -10,7 +10,7 @@ Any feedback very welcome!
 
 **Maven**
 
-Add the plugin and JitPack plugin repository to your POM:
+Add the plugin and [JitPack](https://jitpack.io/) plugin repository to your POM:
 
 ```xml
 <project>
@@ -64,37 +64,17 @@ repositories {
 
 Configuration for the plugin is picked up from your Spring Boot [configuration files](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-application-property-files), specifically the database configuration and flyway.locations properties.
 
-## Running
-
-**Maven**
-
-On command line: 
-
-```bash
-mvn spring-boot-flyway-migrate:goal -Dproperty=value
-```
-
-**Gradle**
-
-TODO
-
-<!---
-```bash
-gradle flyway<Goal> -Dproperty=value
-```
---->
-
 ## Goals
 
 **generate**: generates Flyway migrations between your project's Hibernate entities and database
 
-**migrate**: runs the Flyway [migrate](https://flywaydb.org/documentation/maven/migrate) command
+all other goals run their Flyway equivalents using configuation from your project:  
 
-**validate**: runs the Flyway [validate](https://flywaydb.org/documentation/maven/validate) command
+[migrate](https://flywaydb.org/documentation/maven/migrate), [validate](https://flywaydb.org/documentation/maven/validate)
 
 ## Properties
 
-**profile**: if set the goal will use the profile specific properties file for database configuration [link](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties)
+**profile**: if set the goal will use the profile specific properties file for configuration [link](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties)
 
 ## Examples
 

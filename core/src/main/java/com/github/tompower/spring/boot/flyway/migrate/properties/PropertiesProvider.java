@@ -1,13 +1,14 @@
 package com.github.tompower.spring.boot.flyway.migrate.properties;
 
-import com.github.tompower.spring.boot.flyway.migrate.properties.convertor.PropertiesConverterFactory;
 import com.github.tompower.spring.boot.flyway.migrate.properties.convertor.PropertiesConverter;
+import com.github.tompower.spring.boot.flyway.migrate.properties.convertor.PropertiesConverterFactory;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Locate and return project properties

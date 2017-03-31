@@ -1,10 +1,11 @@
 package com.github.tompower.spring.boot.flyway.migrate.properties.convertor;
 
+import org.apache.commons.lang3.StringUtils;
+import org.yaml.snakeyaml.Yaml;
+
 import java.io.*;
 import java.util.Map;
 import java.util.Properties;
-import org.apache.commons.lang3.StringUtils;
-import org.yaml.snakeyaml.Yaml;
 
 public class PropertiesConverterYaml implements PropertiesConverter {
 

@@ -1,6 +1,8 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
+import com.github.tompower.spring.boot.flyway.migrate.helper.FileHelper;
 import com.github.tompower.spring.boot.flyway.migrate.helper.Messages;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -41,8 +43,7 @@ public class PluginGenerate extends Plugin {
     protected void init() throws PluginExecutionException {
         try {
             super.defaultInit();
-            Hibernate hibernate = new HibernateFactory(properties, resources.getUrls()).create();
-            generate = new Generate(hibernate, flyway);
+            generate = new Generate(new HibernateFactory(properties, FileHelper.getUrls(buildDir)).create(), flyway);
             writer = new Writer();
         } catch (MalformedURLException e) {
             throw new PluginExecutionException(e.getMessage());

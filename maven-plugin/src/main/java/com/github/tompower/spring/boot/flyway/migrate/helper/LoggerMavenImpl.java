@@ -1,7 +1,5 @@
 package com.github.tompower.spring.boot.flyway.migrate.helper;
 
-
-
 public class LoggerMavenImpl implements FlywayMigrateLogger {
 
     private final org.apache.maven.plugin.logging.Log log;

@@ -14,7 +14,7 @@ public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
 
     protected void execute(Plugin plugin) {
         try {
-            PluginFactory.create(plugin, getResourcesDir(), getTargetDir(), profile, logger).execute();
+            PluginFactory.create(plugin, getResourcesDir(), getBuildDir(), profile, logger).execute();
         } catch (PluginExecutionException e) {
             logger.error(e.getMessage());
             e.printStackTrace();
@@ -25,7 +25,7 @@ public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
         return getProject().getRootDir().getAbsolutePath();
     }
 
-    private String getTargetDir() {
+    private String getBuildDir() {
         return getProject().getBuildDir().getAbsolutePath();
     }
 }

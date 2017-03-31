@@ -1,12 +1,6 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
 import com.github.tompower.spring.boot.flyway.migrate.properties.Properties;
-import java.net.URL;
-import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.spi.PersistenceUnitTransactionType;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
@@ -14,6 +8,13 @@ import org.hibernate.jpa.internal.EntityManagerFactoryImpl;
 import org.hibernate.service.ServiceRegistry;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
+
+import javax.persistence.Entity;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.spi.PersistenceUnitTransactionType;
+import java.net.URL;
+import java.util.List;
 
 public class HibernateFactory {
 
