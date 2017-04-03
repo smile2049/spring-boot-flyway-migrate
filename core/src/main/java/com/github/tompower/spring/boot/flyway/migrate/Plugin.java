@@ -12,9 +12,9 @@ public abstract class Plugin {
 
     public abstract void execute() throws PluginExecutionException;
 
-    private String resourcesDir;
+    protected String resourcesDir;
     protected String buildDir;
-    private String profile;
+    protected String profile;
     protected FlywayMigrateLogger logger;
 
     public void setup(String resourcesDir, String buildDir, String profile, FlywayMigrateLogger logger) throws PluginExecutionException {
@@ -27,7 +27,6 @@ public abstract class Plugin {
 
     protected abstract void init() throws PluginExecutionException;
 
-    protected Migration migration;
     protected Properties properties;
     protected Flyway flyway;
 
@@ -35,7 +34,6 @@ public abstract class Plugin {
         try {
             PluginClassloader.updateClassloader(FileHelper.getUrls(buildDir));
             properties = PropertiesProvider.getProperties(FileHelper.getFiles(buildDir), profile);
-            migration = new Migration(properties, resourcesDir);
             flyway = FlywayFactory.create(properties);
         } catch (IOException e) {
             throw new PluginExecutionException(e.getMessage());

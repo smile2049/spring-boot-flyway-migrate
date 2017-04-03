@@ -11,9 +11,6 @@ import java.util.List;
 
 public class PluginGenerate extends Plugin {
 
-    private Generate generate;
-    private Writer writer;
-
     @Override
     public void execute() throws PluginExecutionException {
         try {
@@ -39,12 +36,17 @@ public class PluginGenerate extends Plugin {
 
     }
 
+    private Generate generate;
+    private Writer writer;
+    private Migration migration;
+
     @Override
     protected void init() throws PluginExecutionException {
         try {
             super.defaultInit();
             generate = new Generate(new HibernateFactory(properties, FileHelper.getUrls(buildDir)).create(), flyway);
             writer = new Writer();
+            migration = new Migration(properties, resourcesDir);
         } catch (MalformedURLException e) {
             throw new PluginExecutionException(e.getMessage());
         }
