@@ -4,6 +4,8 @@ import com.github.tompower.spring.boot.flyway.migrate.helper.FlywayMigrateLogger
 import com.github.tompower.spring.boot.flyway.migrate.helper.LoggerGradleImpl;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.logging.Logger;
+import org.gradle.api.plugins.JavaPluginConvention;
+import org.gradle.api.tasks.SourceSet;
 
 public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
 
@@ -22,7 +24,8 @@ public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
     }
 
     private String getResourcesDir() {
-        return getProject().getRootDir().getAbsolutePath();
+        SourceSet main = getProject().getConvention().getPlugin(JavaPluginConvention.class).getSourceSets().getByName("main");
+        return main.getResources().getSrcDirs().toString();
     }
 
     private String getBuildDir() {
