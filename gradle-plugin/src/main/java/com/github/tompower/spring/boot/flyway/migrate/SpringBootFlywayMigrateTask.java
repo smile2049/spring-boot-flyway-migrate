@@ -6,6 +6,10 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.plugins.JavaPluginConvention;
 import org.gradle.api.tasks.SourceSet;
+import org.gradle.api.tasks.SourceSetOutput;
+
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
 
@@ -16,19 +20,20 @@ public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
 
     protected void execute(Plugin plugin) {
         try {
-            PluginFactory.create(plugin, getResourcesDir(), getBuildDir(), profile, logger).execute();
+            SourceSet main = getProject().getConvention().getPlugin(JavaPluginConvention.class).getSourceSets().getByName("main");
+            PluginFactory.create(plugin, getResourcesDir(main), getBuildDirs(main), profile, logger).execute();
         } catch (PluginExecutionException e) {
             logger.error(e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private String getResourcesDir() {
-        SourceSet main = getProject().getConvention().getPlugin(JavaPluginConvention.class).getSourceSets().getByName("main");
-        return main.getResources().getSrcDirs().toString();
+    private String getResourcesDir(SourceSet main) {
+        return main.getResources().getSrcDirs().toArray()[0].toString();
     }
 
-    private String getBuildDir() {
-        return getProject().getBuildDir().getAbsolutePath();
+    private List<String> getBuildDirs(SourceSet main) {
+        SourceSetOutput output = main.getOutput();
+        return Arrays.asList(output.getClassesDir().getAbsolutePath(), output.getResourcesDir().getAbsolutePath());
     }
 }

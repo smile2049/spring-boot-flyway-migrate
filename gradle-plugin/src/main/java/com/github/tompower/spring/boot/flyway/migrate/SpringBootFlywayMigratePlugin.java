@@ -1,5 +1,8 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
+import com.github.tompower.spring.boot.flyway.migrate.tasks.GenerateTask;
+import com.github.tompower.spring.boot.flyway.migrate.tasks.MigrateTask;
+import com.github.tompower.spring.boot.flyway.migrate.tasks.ValidateTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 

@@ -68,7 +68,7 @@ Configuration for the plugin is picked up from your Spring Boot [configuration f
 
 **generate**: generates Flyway migrations between your project's Hibernate entities and database
 
-all other goals run their Flyway equivalents using configuation from your project:  
+all other goals run their Flyway equivalents with configuration from your project + default options:    
 
 [migrate](https://flywaydb.org/documentation/maven/migrate), [validate](https://flywaydb.org/documentation/maven/validate)
 

@@ -7,6 +7,9 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class SpringBootFlywayMigrateMojo extends AbstractMojo {
 
     private FlywayMigrateLogger logger = new LoggerMavenImpl(getLog());
@@ -30,8 +33,8 @@ public abstract class SpringBootFlywayMigrateMojo extends AbstractMojo {
         return resource.getDirectory();
     }
 
-    private String getBuildDirectory(MavenProject project) {
-        return project.getBuild().getOutputDirectory();
+    private List<String> getBuildDirectory(MavenProject project) {
+        return Arrays.asList(project.getBuild().getOutputDirectory());
     }
 
 }
