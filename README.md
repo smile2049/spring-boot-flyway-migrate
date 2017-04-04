@@ -36,41 +36,30 @@ Add the plugin and [JitPack](https://jitpack.io/) plugin repository to your POM:
 
 **Gradle**
 
-TODO 
-<!---
-Add the plugin, buildscript and JitPack repository to your build.gradle:
+Add the plugin and [JitPack](https://jitpack.io/) repository to your build.gradle:
 
 ```gradle
 apply plugin: 'spring-boot-flyway-migrate-gradle-plugin'
-```
-
-```gradle
-buildscript {
-    dependencies {
-        classpath("com.github.tom-power:spring-boot-flyway-migrate-gradle-plugin:0.2.2")
-    }
-}
-```
-
-```gradle
+...
 repositories {
     ...
     maven { url "https://jitpack.io" }
 }	
 ```
--->
 
 ## Configuration
 
 Configuration for the plugin is picked up from your Spring Boot [configuration files](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-application-property-files), specifically the database configuration and flyway.locations properties.
 
-## Goals
+## Commands
 
-**generate**: generates Flyway migrations between your project's Hibernate entities and database
+**generate**: generates [Flyway](https://flywaydb.org) migrations between your project's Hibernate entities and database
 
-all other goals run their Flyway equivalents with configuration from your project + default options:    
+all other commands run their [Flyway](https://flywaydb.org) equivalents with configuration from your project + default options:    
 
-[migrate](https://flywaydb.org/documentation/maven/migrate), [validate](https://flywaydb.org/documentation/maven/validate)
+[migrate](https://flywaydb.org/documentation/command/migrate), [validate](https://flywaydb.org/documentation/command/validate)
+
+Plugin goal/task names follow the [Flyway](https://flywaydb.org) naming conventions <sup>[1](https://flywaydb.org/documentation/maven/)[2](https://flywaydb.org/documentation/gradle/)</sup>
 
 ## Properties
 
@@ -86,7 +75,10 @@ mvn spring-boot-flyway-migrate:generate -Dprofile=dev
 
 **Gradle**
 
-TODO
+
+```bash
+./gradlew flywayGenerate -Dprofile=dev
+```
 
 ## Notes
 
