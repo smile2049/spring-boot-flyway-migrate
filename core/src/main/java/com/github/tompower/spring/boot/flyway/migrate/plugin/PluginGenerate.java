@@ -1,7 +1,9 @@
-package com.github.tompower.spring.boot.flyway.migrate;
+package com.github.tompower.spring.boot.flyway.migrate.plugin;
 
 import com.github.tompower.spring.boot.flyway.migrate.helper.FileHelper;
 import com.github.tompower.spring.boot.flyway.migrate.helper.Messages;
+import com.github.tompower.spring.boot.flyway.migrate.internal.*;
+import com.github.tompower.spring.boot.flyway.migrate.plugin.helper.PluginExecutionException;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +44,8 @@ public class PluginGenerate extends Plugin {
     @Override
     protected void init() throws PluginExecutionException {
         super.defaultInit();
-        generate = new Generate(new HibernateFactory(properties, FileHelper.getUrls(buildDirs)).create(), flyway);
+        Hibernate hibernate = HibernateFactory.create(properties, FileHelper.getUrls(buildDirs));
+        generate = new Generate(hibernate, flyway);
         writer = new Writer();
         migration = new Migration(properties, resourcesDir);
     }

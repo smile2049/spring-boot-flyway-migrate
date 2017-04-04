@@ -1,5 +1,6 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
+import com.github.tompower.spring.boot.flyway.migrate.plugin.PluginMigrate;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;

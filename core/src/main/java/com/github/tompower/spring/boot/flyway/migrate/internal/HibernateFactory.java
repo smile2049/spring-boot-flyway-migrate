@@ -1,4 +1,4 @@
-package com.github.tompower.spring.boot.flyway.migrate;
+package com.github.tompower.spring.boot.flyway.migrate.internal;
 
 import com.github.tompower.spring.boot.flyway.migrate.properties.Properties;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -18,51 +18,48 @@ import java.util.List;
 
 public class HibernateFactory {
 
-    private final Properties properties;
-    private final List<URL> urls;
+    private static Properties properties;
+    private static List<URL> urls;
 
-    public HibernateFactory(Properties properties, List<URL> urls) {
-        this.properties = properties;
-        this.urls = urls;
-    }
-
-    public Hibernate create() {
+    public static Hibernate create(Properties properties, List<URL> urls) {
+        HibernateFactory.properties = properties;
+        HibernateFactory.urls = urls;
         disableLogs();
-        return new Hibernate(getEntityManagerFactory(getConfiguration(properties)));
+        return new Hibernate(getEntityManagerFactory(getConfiguration()));
     }
 
-    private void disableLogs() throws SecurityException {
+    private static void disableLogs() throws SecurityException {
 //        java.util.logging.Logger.getLogger("org.hibernate").setLevel(java.util.logging.Level.OFF);
 //        Logger.getLogger("org.hibernate").setLevel(Level.OFF);
 //        LogManager.getRootLogger().setLevel(Level.OFF);
     }
 
-    private EntityManagerFactory getEntityManagerFactory(Configuration configuration) {
+    private static EntityManagerFactory getEntityManagerFactory(Configuration configuration) {
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         return new EntityManagerFactoryImpl(PersistenceUnitTransactionType.RESOURCE_LOCAL, true, null, configuration, serviceRegistry, null);
     }
 
-    private Configuration getConfiguration(Properties properties) {
+    private static Configuration getConfiguration() {
         Configuration configuration = new Configuration();
-        addDatasourceProperties(configuration, properties);
+        addDatasourceProperties(configuration);
         addEntities(configuration);
         return configuration;
     }
 
-    private void addDatasourceProperties(Configuration configuration, Properties properties) {
+    private static void addDatasourceProperties(Configuration configuration) {
         configuration.setProperty(AvailableSettings.URL, properties.getUrl());
         configuration.setProperty(AvailableSettings.DRIVER, properties.getDriver());
         configuration.setProperty(AvailableSettings.USER, properties.getUser());
         configuration.setProperty(AvailableSettings.PASS, properties.getPass());
     }
 
-    private void addEntities(Configuration configuration) {
+    private static void addEntities(Configuration configuration) {
         final Reflections reflections = getReflections();
         reflections.getTypesAnnotatedWith(MappedSuperclass.class).stream().forEach(configuration::addAnnotatedClass);
         reflections.getTypesAnnotatedWith(Entity.class).stream().forEach(configuration::addAnnotatedClass);
     }
 
-    private Reflections getReflections() {
+    private static Reflections getReflections() {
         Reflections.log = null;
         ConfigurationBuilder configuration = new ConfigurationBuilder().addUrls(urls);
         return new Reflections(configuration);

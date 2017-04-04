@@ -1,4 +1,4 @@
-package com.github.tompower.spring.boot.flyway.migrate;
+package com.github.tompower.spring.boot.flyway.migrate.internal;
 
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.MigrationInfo;

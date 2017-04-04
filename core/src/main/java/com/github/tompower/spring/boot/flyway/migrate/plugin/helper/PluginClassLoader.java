@@ -1,4 +1,4 @@
-package com.github.tompower.spring.boot.flyway.migrate;
+package com.github.tompower.spring.boot.flyway.migrate.plugin.helper;
 
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -10,11 +10,11 @@ public class PluginClassLoader {
         setClassLoader(getClassLoader(urls));
     }
 
-    public static void setClassLoader(ClassLoader classLoader) {
+    private static void setClassLoader(ClassLoader classLoader) {
         Thread.currentThread().setContextClassLoader(classLoader);
     }
 
-    public static ClassLoader getClassLoader(List<URL> urls) throws PluginExecutionException {
+    private static ClassLoader getClassLoader(List<URL> urls) throws PluginExecutionException {
         return URLClassLoader.newInstance(urls.toArray(new URL[0]), Thread.currentThread().getContextClassLoader());
     }
 

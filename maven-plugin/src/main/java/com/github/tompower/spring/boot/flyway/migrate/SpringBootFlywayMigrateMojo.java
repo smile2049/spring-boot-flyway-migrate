@@ -2,6 +2,9 @@ package com.github.tompower.spring.boot.flyway.migrate;
 
 import com.github.tompower.spring.boot.flyway.migrate.helper.FlywayMigrateLogger;
 import com.github.tompower.spring.boot.flyway.migrate.helper.LoggerMavenImpl;
+import com.github.tompower.spring.boot.flyway.migrate.plugin.helper.PluginExecutionException;
+import com.github.tompower.spring.boot.flyway.migrate.plugin.Plugin;
+import com.github.tompower.spring.boot.flyway.migrate.plugin.helper.PluginFactory;
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;

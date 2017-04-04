@@ -1,7 +1,10 @@
-package com.github.tompower.spring.boot.flyway.migrate;
+package com.github.tompower.spring.boot.flyway.migrate.plugin;
 
 import com.github.tompower.spring.boot.flyway.migrate.helper.FileHelper;
 import com.github.tompower.spring.boot.flyway.migrate.helper.FlywayMigrateLogger;
+import com.github.tompower.spring.boot.flyway.migrate.internal.FlywayFactory;
+import com.github.tompower.spring.boot.flyway.migrate.plugin.helper.PluginClassLoader;
+import com.github.tompower.spring.boot.flyway.migrate.plugin.helper.PluginExecutionException;
 import com.github.tompower.spring.boot.flyway.migrate.properties.Properties;
 import com.github.tompower.spring.boot.flyway.migrate.properties.PropertiesProvider;
 import org.flywaydb.core.Flyway;
@@ -33,11 +36,9 @@ public abstract class Plugin {
 
     protected void defaultInit() throws PluginExecutionException {
         try {
-            ClassLoader classLoader = PluginClassLoader.getClassLoader(FileHelper.getUrls(buildDirs));
-            PluginClassLoader.setClassLoader(classLoader);
-//            PluginClassLoader.updateClassLoader(FileHelper.getUrls(buildDirs));
+            PluginClassLoader.updateClassLoader(FileHelper.getUrls(buildDirs));
             properties = PropertiesProvider.getProperties(FileHelper.getFiles(buildDirs), profile);
-            flyway = FlywayFactory.create(properties, classLoader);
+            flyway = FlywayFactory.create(properties);
         } catch (IOException e) {
             throw new PluginExecutionException(e.getMessage());
         }

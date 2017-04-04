@@ -1,6 +1,8 @@
-package com.github.tompower.spring.boot.flyway.migrate;
+package com.github.tompower.spring.boot.flyway.migrate.plugin.helper;
 
 import com.github.tompower.spring.boot.flyway.migrate.helper.FlywayMigrateLogger;
+import com.github.tompower.spring.boot.flyway.migrate.plugin.Plugin;
+
 import java.util.List;
 
 public class PluginFactory {

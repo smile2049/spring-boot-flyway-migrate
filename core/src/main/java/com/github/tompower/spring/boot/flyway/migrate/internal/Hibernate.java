@@ -1,4 +1,4 @@
-package com.github.tompower.spring.boot.flyway.migrate;
+package com.github.tompower.spring.boot.flyway.migrate.internal;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

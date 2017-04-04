@@ -1,4 +1,4 @@
-package com.github.tompower.spring.boot.flyway.migrate;
+package com.github.tompower.spring.boot.flyway.migrate.internal;
 
 import com.github.tompower.spring.boot.flyway.migrate.properties.Properties;
 

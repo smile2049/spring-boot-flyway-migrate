@@ -1,4 +1,4 @@
-package com.github.tompower.spring.boot.flyway.migrate;
+package com.github.tompower.spring.boot.flyway.migrate.internal;
 
 public class MigrationValues {
     public final static String DEFAULT_MIGRATION_DIRECTORY = "db/migration";

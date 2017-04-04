@@ -1,5 +1,7 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
+import com.github.tompower.spring.boot.flyway.migrate.internal.Migration;
+import com.github.tompower.spring.boot.flyway.migrate.internal.MigrationValues;
 import com.github.tompower.spring.boot.flyway.migrate.properties.Properties;
 import com.github.tompower.spring.boot.flyway.migrate.properties.PropertiesValues;
 import org.junit.Test;

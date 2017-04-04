@@ -1,6 +1,6 @@
 package com.github.tompower.spring.boot.flyway.migrate.properties;
 
-import com.github.tompower.spring.boot.flyway.migrate.MigrationValues;
+import com.github.tompower.spring.boot.flyway.migrate.internal.MigrationValues;
 import org.springframework.boot.jdbc.DatabaseDriver;
 
 import java.util.Arrays;
