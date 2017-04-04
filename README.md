@@ -39,12 +39,16 @@ Add the plugin and [JitPack](https://jitpack.io/) plugin repository to your POM:
 Add the plugin and [JitPack](https://jitpack.io/) repository to your build.gradle:
 
 ```groovy
-apply plugin: 'spring-boot-flyway-migrate-gradle-plugin'
-...
-pluginRepositories {
-    ...
-    maven { url "https://jitpack.io" }
-}	
+buildscript {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+    dependencies {
+        classpath("com.github.tom-power.spring-boot-flyway-migrate:gradle-plugin:0.3")
+    }
+}
+
+apply plugin: 'spring-boot-flyway-migrate'
 ```
 
 ## Configuration
@@ -94,10 +98,10 @@ The plugin's commands use your project's compiled classes and files, so please e
 
 ## Database support
 
-**Hibernate** https://developer.jboss.org/wiki/SupportedDatabases2<br/>
+**Hibernate** https://developer.jboss.org/wiki/SupportedDatabases2
 **Flyway** http://flywaydb.org/documentation/
 
-Dependencies for MySQL and H2 are included, additional dependencies can be added to your project as needed. [maven](https://maven.apache.org/guides/mini/guide-configuring-plugins.html#Using_the_dependencies_Tag)
+Dependencies for MySQL and H2 are included, additional dependencies can be added to your project as needed <sup>[1](https://maven.apache.org/guides/mini/guide-configuring-plugins.html#Using_the_dependencies_Tag) [2]()</sup>.
 
 ## Links
 
