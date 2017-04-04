@@ -20,7 +20,7 @@ Add the plugin and [JitPack](https://jitpack.io/) plugin repository to your POM:
     <plugin>
       <groupId>com.github.tom-power.spring-boot-flyway-migrate</groupId>
       <artifactId>maven-plugin</artifactId>
-      <version>0.2.2</version>
+      <version>0.3</version>
     </plugin>
   </plugins>
   ...
@@ -38,10 +38,10 @@ Add the plugin and [JitPack](https://jitpack.io/) plugin repository to your POM:
 
 Add the plugin and [JitPack](https://jitpack.io/) repository to your build.gradle:
 
-```gradle
+```groovy
 apply plugin: 'spring-boot-flyway-migrate-gradle-plugin'
 ...
-repositories {
+pluginRepositories {
     ...
     maven { url "https://jitpack.io" }
 }	
