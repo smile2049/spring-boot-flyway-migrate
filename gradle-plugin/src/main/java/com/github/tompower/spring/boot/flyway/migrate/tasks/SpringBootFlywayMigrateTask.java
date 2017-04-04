@@ -1,4 +1,4 @@
-package com.github.tompower.spring.boot.flyway.migrate;
+package com.github.tompower.spring.boot.flyway.migrate.tasks;
 
 import com.github.tompower.spring.boot.flyway.migrate.helper.FlywayMigrateLogger;
 import com.github.tompower.spring.boot.flyway.migrate.helper.LoggerGradleImpl;
@@ -24,7 +24,11 @@ public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
     protected void execute(Plugin plugin) {
         try {
             SourceSet main = getProject().getConvention().getPlugin(JavaPluginConvention.class).getSourceSets().getByName("main");
-            PluginFactory.create(plugin, getResourcesDir(main), getBuildDirs(main), profile, logger).execute();
+            PluginFactory.create(plugin,
+                    getResourcesDir(main),
+                    getBuildDirs(main),
+                    profile,
+                    logger).execute();
         } catch (PluginExecutionException e) {
             logger.error(e.getMessage());
             e.printStackTrace();
