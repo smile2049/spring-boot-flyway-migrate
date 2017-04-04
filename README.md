@@ -57,7 +57,7 @@ Configuration for the plugin is picked up from your Spring Boot [configuration f
 
 all other commands run their [Flyway](https://flywaydb.org) equivalents with configuration from your project + default options:    
 
-[migrate](https://flywaydb.org/documentation/command/migrate), [validate](https://flywaydb.org/documentation/command/validate)
+[migrate](https://flywaydb.org/documentation/command/migrate), [clean](https://flywaydb.org/documentation/command/clean), [info](https://flywaydb.org/documentation/command/info), [validate](https://flywaydb.org/documentation/command/validate), [baseline](https://flywaydb.org/documentation/command/baseline), [repair](https://flywaydb.org/documentation/command/repair)
 
 Plugin goal/task names follow the [Flyway](https://flywaydb.org) naming conventions <sup>[1](https://flywaydb.org/documentation/maven/)[2](https://flywaydb.org/documentation/gradle/)</sup>
 

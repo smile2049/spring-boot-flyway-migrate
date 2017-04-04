@@ -2,8 +2,8 @@ package com.github.tompower.spring.boot.flyway.migrate.tasks;
 
 import com.github.tompower.spring.boot.flyway.migrate.helper.FlywayMigrateLogger;
 import com.github.tompower.spring.boot.flyway.migrate.helper.LoggerGradleImpl;
-import com.github.tompower.spring.boot.flyway.migrate.plugin.helper.PluginExecutionException;
 import com.github.tompower.spring.boot.flyway.migrate.plugin.Plugin;
+import com.github.tompower.spring.boot.flyway.migrate.plugin.helper.PluginExecutionException;
 import com.github.tompower.spring.boot.flyway.migrate.plugin.helper.PluginFactory;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.logging.Logger;

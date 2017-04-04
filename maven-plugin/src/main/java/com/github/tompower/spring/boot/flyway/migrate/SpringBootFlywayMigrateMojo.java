@@ -8,6 +8,7 @@ import com.github.tompower.spring.boot.flyway.migrate.plugin.helper.PluginFactor
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
 import java.util.Arrays;
@@ -15,9 +16,14 @@ import java.util.List;
 
 public abstract class SpringBootFlywayMigrateMojo extends AbstractMojo {
 
+    @Parameter(defaultValue = "${project}", readonly = true, required = true)
+    protected MavenProject project;
+    @Parameter(property = "profile")
+    protected String profile;
+
     private FlywayMigrateLogger logger = new LoggerMavenImpl(getLog());
 
-    protected void execute(Plugin plugin, MavenProject project, String profile) throws MojoExecutionException {
+    protected void execute(Plugin plugin) throws MojoExecutionException {
         try {
             PluginFactory.create(plugin,
                     getResourceDirectory(project),
