@@ -67,7 +67,7 @@ Plugin goal/task names follow the [Flyway](https://flywaydb.org) naming conventi
 
 ## Properties
 
-**profile**: if set the goal will use the profile specific properties file for configuration [link](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties)
+**profile**: if set the command will use the profile specific properties file for configuration [link](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties)
 
 ## Examples
 
@@ -99,9 +99,10 @@ The plugin's commands use your project's compiled classes and files, so please e
 ## Database support
 
 **Hibernate** https://developer.jboss.org/wiki/SupportedDatabases2
+
 **Flyway** http://flywaydb.org/documentation/
 
-Dependencies for MySQL and H2 are included, additional dependencies can be added to your project as needed <sup>[1](https://maven.apache.org/guides/mini/guide-configuring-plugins.html#Using_the_dependencies_Tag) [2]()</sup>.
+Dependencies for MySQL and H2 are included, additional dependencies can be added to your project as needed <sup>[1](https://maven.apache.org/guides/mini/guide-configuring-plugins.html#Using_the_dependencies_Tag) [2](https://docs.gradle.org/current/userguide/organizing_build_logic.html#sec:build_script_external_dependencies)</sup>.
 
 ## Links
 
