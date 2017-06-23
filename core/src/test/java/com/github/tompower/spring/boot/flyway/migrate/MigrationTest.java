@@ -1,9 +1,9 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
-import com.github.tompower.spring.boot.flyway.migrate.internal.Migration;
-import com.github.tompower.spring.boot.flyway.migrate.internal.MigrationValues;
-import com.github.tompower.spring.boot.flyway.migrate.properties.Properties;
-import com.github.tompower.spring.boot.flyway.migrate.properties.PropertiesValues;
+import com.github.tompower.spring.boot.flyway.migrate.core.Migration;
+import com.github.tompower.spring.boot.flyway.migrate.core.MigrationValues;
+import com.github.tompower.spring.boot.flyway.migrate.core.properties.Properties;
+import com.github.tompower.spring.boot.flyway.migrate.core.properties.PropertiesValues;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -1,6 +1,6 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
-import com.github.tompower.spring.boot.flyway.migrate.plugin.PluginClean;
+import com.github.tompower.spring.boot.flyway.migrate.plugin.Clean;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 
@@ -12,7 +12,7 @@ public class CleanMojo extends SpringBootFlywayMigrateMojo {
 
     @Override
     public void execute() throws MojoExecutionException {
-        super.execute(new PluginClean());
+        super.execute(new Clean());
     }
 
 }

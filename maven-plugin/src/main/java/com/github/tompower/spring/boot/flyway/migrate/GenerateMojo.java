@@ -1,6 +1,6 @@
 package com.github.tompower.spring.boot.flyway.migrate;
 
-import com.github.tompower.spring.boot.flyway.migrate.plugin.PluginGenerate;
+import com.github.tompower.spring.boot.flyway.migrate.plugin.Generate;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 
@@ -12,7 +12,7 @@ public class GenerateMojo extends SpringBootFlywayMigrateMojo {
 
     @Override
     public void execute() throws MojoExecutionException {
-        super.execute(new PluginGenerate());
+        super.execute(new Generate());
     }
 
 }
