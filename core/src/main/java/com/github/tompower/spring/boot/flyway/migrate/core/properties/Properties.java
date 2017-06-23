@@ -5,31 +5,33 @@ import org.springframework.boot.jdbc.DatabaseDriver;
 
 import java.util.Arrays;
 
-public class Properties {
+public class Properties extends java.util.Properties {
 
-    final java.util.Properties properties;
+    public Properties() {
+        super();
+    }
 
-    public Properties(java.util.Properties properties) {
-        this.properties = properties;
+    public Properties(java.util.Properties defaults) {
+        super(defaults);
     }
 
     public String getUrl() {
-        String url = properties.getProperty(PropertiesValues.JDBC_URL);
+        String url = this.getProperty(PropertiesValues.JDBC_URL);
         return url != null ? url : PropertiesValues.H2_URL;
     }
 
     public String getDriver() {
-        String driver = properties.getProperty(PropertiesValues.DRIVER_CLASS);
+        String driver = this.getProperty(PropertiesValues.DRIVER_CLASS);
         return driver != null ? driver : PropertiesValues.H2_DRIVER;
     }
 
     public String getUser() {
-        String username = properties.getProperty(PropertiesValues.USERNAME);
+        String username = this.getProperty(PropertiesValues.USERNAME);
         return username != null ? username : "";
     }
 
     public String getPass() {
-        String password = properties.getProperty(PropertiesValues.PASSWORD);
+        String password = this.getProperty(PropertiesValues.PASSWORD);
         return password != null ? password : "";
     }
 
@@ -45,7 +47,7 @@ public class Properties {
     }
 
     private String[] getPropertiesFlywayLocations() {
-        String flywayLocations = properties.getProperty(PropertiesValues.FLYWAY_LOCATIONS);
+        String flywayLocations = this.getProperty(PropertiesValues.FLYWAY_LOCATIONS);
         return flywayLocations != null ? flywayLocations.split(",") : new String[]{""};
     }
 

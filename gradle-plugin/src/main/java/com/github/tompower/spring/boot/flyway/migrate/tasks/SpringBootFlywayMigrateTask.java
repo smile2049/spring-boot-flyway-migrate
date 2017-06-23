@@ -13,10 +13,11 @@ import org.gradle.api.tasks.SourceSetOutput;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
 
-    private final String profile = System.getProperty("profile");
+    private final Properties properties = System.getProperties();
     private FlywayMigrateLogger logger = new LoggerGradleImpl((Logger) getLogger());
 
     public abstract void action();
@@ -27,7 +28,7 @@ public abstract class SpringBootFlywayMigrateTask extends DefaultTask {
             PluginFactory.create(plugin,
                     getResourcesDir(main),
                     getBuildDirs(main),
-                    profile,
+                    properties,
                     logger).execute();
         } catch (PluginExecutionException e) {
             logger.error(e.getMessage());

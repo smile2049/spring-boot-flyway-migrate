@@ -18,26 +18,25 @@ public abstract class Plugin {
 
     protected String resourcesDir;
     protected List<String> buildDirs;
-    protected String profile;
+    protected Properties properties;
     protected FlywayMigrateLogger logger;
 
-    public void setup(String resourcesDir, List<String> buildDirs, String profile, FlywayMigrateLogger logger) throws PluginExecutionException {
+    public void setup(String resourcesDir, List<String> buildDirs, Properties properties, FlywayMigrateLogger logger) throws PluginExecutionException {
         this.resourcesDir = resourcesDir;
         this.buildDirs = buildDirs;
-        this.profile = profile;
+        this.properties = properties;
         this.logger = logger;
         init();
     }
 
     protected abstract void init() throws PluginExecutionException;
 
-    protected Properties properties;
     protected Flyway flyway;
 
     protected void defaultInit() throws PluginExecutionException {
         try {
             PluginClassLoader.updateClassLoader(FileHelper.getUrls(buildDirs));
-            properties = PropertiesProvider.getProperties(FileHelper.getFiles(buildDirs), profile);
+            properties.putAll(PropertiesProvider.getProperties(FileHelper.getFiles(buildDirs), properties.getProperty("profile")));
             flyway = FlywayFactory.create(properties);
         } catch (IOException e) {
             throw new PluginExecutionException(e.getMessage());
