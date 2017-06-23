@@ -4,9 +4,6 @@ import com.github.tompower.spring.boot.flyway.migrate.plugin.Baseline;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 
-/**
- * Generate Flyway migrations
- */
 @Mojo(name = "baseline")
 public class BaselineMojo extends SpringBootFlywayMigrateMojo {
 

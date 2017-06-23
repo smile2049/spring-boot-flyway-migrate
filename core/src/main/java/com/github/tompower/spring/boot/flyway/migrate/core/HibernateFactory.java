@@ -24,14 +24,7 @@ public class HibernateFactory {
     public static Hibernate create(Properties properties, List<URL> urls) {
         HibernateFactory.properties = properties;
         HibernateFactory.urls = urls;
-        disableLogs();
         return new Hibernate(getEntityManagerFactory(getConfiguration()));
-    }
-
-    private static void disableLogs() throws SecurityException {
-//        java.util.logging.Logger.getLogger("org.hibernate").setLevel(java.util.logging.Level.OFF);
-//        Logger.getLogger("org.hibernate").setLevel(Level.OFF);
-//        LogManager.getRootLogger().setLevel(Level.OFF);
     }
 
     private static EntityManagerFactory getEntityManagerFactory(Configuration configuration) {
