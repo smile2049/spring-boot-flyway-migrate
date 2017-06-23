@@ -69,19 +69,21 @@ Plugin goal/task names follow the [Flyway](https://flywaydb.org) naming conventi
 
 **profile**: if set the command will use the profile specific properties file for configuration [link](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties)
 
+**description**: if set the generate command will add this as the description section of the flyway migration file name [link](https://flywaydb.org/documentation/migration/sql)
+
 ## Examples
 
 **Maven**
 
 ```bash
-mvn spring-boot-flyway-migrate:generate -Dprofile=dev
+mvn spring-boot-flyway-migrate:generate -Dprofile=dev -Ddescription=new_stuff
 ```
 
 **Gradle**
 
 
 ```bash
-./gradlew flywayGenerate -Dprofile=dev
+./gradlew flywayGenerate -Dprofile=dev -Ddescription=new_stuff
 ```
 
 ## Notes

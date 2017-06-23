@@ -1,9 +1,6 @@
 package com.github.tompower.spring.boot.flyway.migrate.plugin;
 
-import com.github.tompower.spring.boot.flyway.migrate.core.Hibernate;
-import com.github.tompower.spring.boot.flyway.migrate.core.HibernateFactory;
-import com.github.tompower.spring.boot.flyway.migrate.core.Migration;
-import com.github.tompower.spring.boot.flyway.migrate.core.Writer;
+import com.github.tompower.spring.boot.flyway.migrate.core.*;
 import com.github.tompower.spring.boot.flyway.migrate.core.helper.FileHelper;
 import com.github.tompower.spring.boot.flyway.migrate.core.helper.Messages;
 import com.github.tompower.spring.boot.flyway.migrate.plugin.abs.Plugin;
@@ -21,7 +18,7 @@ public class Generate extends Plugin {
         try {
             List<String> updates = generate.getUpdates();
             if (!updates.isEmpty()) {
-                File file = migration.getFile(generate.getCurrentVersion() + 1);
+                File file = migration.getFile(generate.getCurrentVersion() + 1, properties.getProperty("description"));
                 if (!file.exists()) {
                     if (!file.getParentFile().mkdirs() || !file.createNewFile()) {
                         logger.error(Messages.CANNOT_CREATE + file.getAbsolutePath());

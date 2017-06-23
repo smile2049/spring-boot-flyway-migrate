@@ -1,5 +1,7 @@
 package com.github.tompower.spring.boot.flyway.migrate.core;
 
+import com.github.tompower.spring.boot.flyway.migrate.core.helper.MigrationHelper;
+import com.github.tompower.spring.boot.flyway.migrate.core.helper.MigrationValues;
 import com.github.tompower.spring.boot.flyway.migrate.core.properties.Properties;
 
 import java.io.File;
@@ -15,17 +17,19 @@ public class Migration {
     }
 
     /**
-     * Get file for Flyway Migration
+     * Get file for Flyway Migration using version and description
      *
      * @param version
+     * @param description
      * @return File
      */
-    public File getFile(Integer version) {
-        return new File(getResourcesDirectory() + getMigrationFile(version));
+    public File getFile(Integer version, String description) {
+        return new File(getResourcesDirectory() + getMigrationFile(version, description));
     }
 
-    private String getMigrationFile(Integer version) {
-        return MigrationValues.MIGRATION_FILE_PREFIX + String.valueOf(version) + MigrationValues.MIGRATION_FILE_SUFFIX;
+
+    private String getMigrationFile(Integer version, String description) {
+        return MigrationHelper.getMigrationFileName(version, description);
     }
 
     private String getResourcesDirectory() {
